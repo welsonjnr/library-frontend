@@ -49,11 +49,11 @@ const FormLivro = () => {
             <CCardBody>
               <CFormGroup>
                 <CLabel htmlFor="nomelivro">Livro</CLabel>
-                <CInput id="nomeLivro" placeholder="Insira o nome do livro" />
+                <CInput id="nomeLivro" placeholder="Insira com o nome do livro" />
               </CFormGroup>
               <CFormGroup>
                 <CLabel htmlFor="autor">Autor</CLabel>
-                <CInput id="autorLivro" placeholder="Insira o autor do livro" />
+                <CInput id="autorLivro" placeholder="Insira com o autor do livro" />
               </CFormGroup>
               <CFormGroup>
                 <CLabel htmlFor="edicao">Edição</CLabel>
@@ -78,8 +78,8 @@ const FormLivro = () => {
                   </CFormGroup>
             </CCardBody>
             <CCardFooter>
-              <CButton type="submit" size="sm" color="primary"><CIcon name="cil-scrubber" /> Salvar</CButton>
-              <CButton type="reset" size="sm" color="danger"><CIcon name="cil-ban" /> Cancelar</CButton>
+              <CButton type="submit" size="sm" color="primary"><CIcon name="cil-scrubber" /> Submit</CButton>
+              <CButton type="reset" size="sm" color="danger"><CIcon name="cil-ban" /> Reset</CButton>
             </CCardFooter>
           </CCard>
         </CCol>
