@@ -16,14 +16,14 @@ import ChartLineSimple from "../charts/ChartLineSimple";
 import {DocsLink} from "../../reusable";
 import usersData from "../users/UsersData";
 
-const HireBooks = (props) => {
+const Emprestimo = (props) => {
 
   return (
     <>
       {/*<CCol xs="12" lg="6">*/}
 
       <CCardHeader>
-        Livros
+        Empréstimos
       </CCardHeader>
       <CCardBody>
         <CRow>
@@ -32,10 +32,13 @@ const HireBooks = (props) => {
               <CRow>
                 <CCol>
                   <CLabel htmlFor="titulo">Pesquisar</CLabel>
-                  <CInput id="titulo" placeholder="Título do livro" required/>
+                  <CInput id="filtroClienteByNome" placeholder="Nome do cliente" />
                 </CCol>
                 <CCol xl="2" lg="2" sm="2" md="2">
-                  <CButton block color="success" className="mb-0 mt-4">Pesquisar</CButton>
+                  <CButton block color="success" className="mb-0" style={{marginTop: '29px'}}>Pesquisar</CButton>
+                </CCol>
+                <CCol xl="2" lg="2" sm="2" md="2">
+                  <CButton block color="primary" className="mb-0" style={{marginTop: '29px'}}>Novo</CButton>
                 </CCol>
               </CRow>
             </CFormGroup>
@@ -47,10 +50,10 @@ const HireBooks = (props) => {
         <CCardBody>
           <CDataTable
             items={[
-              {id: 0, título: 'Harry Potter', edição: "2", autor: "Author", quantidade: 2, status: "Disponível"},
-              {id: 1, título: 'Harry Potter', edição: "2", autor: "Author", quantidade: 3, status: "Esgotado"}
+              {ID: 0, cliente: 'Claudio Potter', livro: "Harry Poter", emprestimo:"12/04/2020", retorno: "20/03/2021", status: "Disponível"},
+              {ID: 1, cliente: 'João Potter', livro: "Fique Rico", emprestimo:"30/05/2020", retorno: "06/06/2020", status: "Disponível"}
             ]}
-            fields={['título', 'edição', 'autor', 'status', 'quantidade', '']}
+            fields={['ID', 'cliente', 'livro', 'emprestimo', 'retorno', 'status', 'ações']}
             itemsPerPage={5}
             pagination
             scopedSlots={{
@@ -61,16 +64,22 @@ const HireBooks = (props) => {
                       {item.status}
                     </CBadge>
                   </td>
+                ),
+                'ações':
+                (item) => (
+                    <td>
+                      <CButton type="submit" color="primary"><CIcon name="cil-arrow-circle-bottom" /></CButton>
+                      <CButton type="submit" color="dark"><CIcon name="cil-reload" /></CButton>
+                      <CButton type="reset" color="danger"><CIcon name="cil-trash" /></CButton>
+                    </td>
                 )
             }}
           />
         </CCardBody>
       </CCard>
-
-
       {/*</CCol>*/}
     </>
   )
 }
 
-export default HireBooks
+export default Emprestimo
