@@ -34,7 +34,7 @@ import {
 import CIcon from '@coreui/icons-react'
 import { DocsLink } from 'src/reusable'
 
-const FormLivro = () => {
+const FormCliente = () => {
   const [collapsed, setCollapsed] = React.useState(true)
   const [showElements, setShowElements] = React.useState(true)
 
@@ -73,8 +73,8 @@ const FormLivro = () => {
               </CFormGroup>
             </CCardBody>
             <CCardFooter>
-              <CButton type="submit" size="sm" color="primary"><CIcon name="cil-scrubber" /> Salvar</CButton>
-              <CButton type="reset" size="sm" color="danger"><CIcon name="cil-ban" /> Cancelar</CButton>
+              <CButton type="submit" size="sm" color="primary"><CIcon name="cil-scrubber" /> Submit</CButton>
+              <CButton type="reset" size="sm" color="danger"><CIcon name="cil-ban" /> Reset</CButton>
             </CCardFooter>
           </CCard>
         </CCol>
@@ -83,4 +83,4 @@ const FormLivro = () => {
   )
 }
 
-export default FormLivro
+export default FormCliente
