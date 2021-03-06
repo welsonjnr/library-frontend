@@ -1,4 +1,5 @@
 import React from 'react'
+import '../imgs/imgs.css'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   CCreateElement,
@@ -27,11 +28,8 @@ const TheSidebar = () => {
       onShowChange={(val) => dispatch({type: 'set', sidebarShow: val })}
     >
       <CSidebarBrand className="d-md-down-none" to="/">
-        <CIcon
-          className="c-sidebar-brand-full"
-          name="logo-negative"
-          height={35}
-        />
+        <div id="Logo">STUDIUM</div>
+        <div id="Logo2">LIBRARY</div>
         <CIcon
           className="c-sidebar-brand-minimized"
           name="sygnet"

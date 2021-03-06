@@ -68,8 +68,8 @@ const Livro = (props) => {
                 'ações':
                 (item) => (
                     <td>
-                      <CButton type="submit" color="primary"><CIcon name="cil-pencil" /></CButton>
-                      <CButton type="reset" color="danger"><CIcon name="cil-trash" /></CButton>
+                      <CButton type="submit" color="primary"><CIcon name="cil-pencil" title="Editar"/></CButton>
+                      <CButton type="reset" color="danger"><CIcon name="cil-trash" title="Excluir"/></CButton>
                     </td>
                 )
             }}

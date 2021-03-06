@@ -68,9 +68,9 @@ const Emprestimo = (props) => {
                 'ações':
                 (item) => (
                     <td>
-                      <CButton type="submit" color="primary"><CIcon name="cil-arrow-circle-bottom" /></CButton>
-                      <CButton type="submit" color="dark"><CIcon name="cil-reload" /></CButton>
-                      <CButton type="reset" color="danger"><CIcon name="cil-trash" /></CButton>
+                      <CButton type="submit" color="primary"><CIcon name="cil-arrow-circle-bottom" title="Retornar"/></CButton>
+                      <CButton type="submit" color="dark"><CIcon name="cil-reload" title="Renovar"/></CButton>
+                      <CButton type="reset" color="danger"><CIcon name="cil-trash" title="Excluir"/></CButton>
                     </td>
                 )
             }}

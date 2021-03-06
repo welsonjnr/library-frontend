@@ -50,7 +50,7 @@ const HireBooks = (props) => {
               {id: 0, título: 'Harry Potter', edição: "2", autor: "Author", quantidade: 2, status: "Disponível"},
               {id: 1, título: 'Harry Potter', edição: "2", autor: "Author", quantidade: 3, status: "Esgotado"}
             ]}
-            fields={['título', 'edição', 'autor', 'status', 'quantidade', '']}
+            fields={['título', 'edição', 'autor', 'status', 'quantidade', 'ações']}
             itemsPerPage={5}
             pagination
             scopedSlots={{
@@ -61,6 +61,12 @@ const HireBooks = (props) => {
                       {item.status}
                     </CBadge>
                   </td>
+                ),
+                'ações':
+                (item) => (
+                    <td>
+                      <CButton type="submit" color="primary"><CIcon name="cil-arrow-thick-from-bottom" title="Emprestar"/></CButton>
+                    </td>
                 )
             }}
           />
