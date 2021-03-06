@@ -1,5 +1,9 @@
 import React, { lazy } from 'react'
-import HireBooks from "../widgets/HireBooks";
+import Clientes from "../widgets/Clientes";
+import HireBooks from "../widgets/HireBooks"
+import Emprestimo from "../widgets/Emprestimo"
+import EmprestimoLivro from "../emprestimo/emprestimo"
+import Livro from "../widgets/Livro"
 import { CCard, CCardBody, CRow, CCol, CButton } from "@coreui/react";
 
 // import {
@@ -28,10 +32,9 @@ const Dashboard = () => {
       <CCard>
         <CRow>
           <CCol>
-            <HireBooks/>
+            < EmprestimoLivro/>
           </CCol>
         </CRow>
-
       </CCard>
 
 
