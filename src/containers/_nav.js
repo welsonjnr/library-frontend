@@ -13,8 +13,34 @@ const _nav =  [
     }
   },
   {
-    _tag: 'CSidebarNavTitle',
-    _children: ['Theme']
+    _tag: 'CSidebarNavItem',
+    name: 'Home',
+    to: '/theme/typography',
+    icon: 'cil-home',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Minha Conta',
+    to: '/theme/typography',
+    icon: 'cil-people',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Livros',
+    to: '/livro',
+    icon: 'cil-layers',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Clientes',
+    to: '/cliente',
+    icon: 'cil-group',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Empréstimos',
+    to: '/emprestimo',
+    icon: 'cil-arrow-thick-from-bottom',
   },
   {
     _tag: 'CSidebarNavItem',
