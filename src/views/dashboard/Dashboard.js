@@ -2,7 +2,7 @@ import React, { lazy } from 'react'
 import Clientes from "../widgets/Clientes";
 import HireBooks from "../widgets/HireBooks"
 import Emprestimo from "../widgets/Emprestimo"
-import EmprestimoLivro from "../emprestimo/emprestimo"
+import EmprestimoLivro from "../emprestimo/Emprestimo"
 import Livro from "../widgets/Livro"
 import { CCard, CCardBody, CRow, CCol, CButton } from "@coreui/react";
 
