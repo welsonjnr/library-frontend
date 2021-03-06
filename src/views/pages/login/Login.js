@@ -1,5 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect, useContext } from 'react'
+import axios from '../../../common/axios'
+import { AuthorizationContext } from '../../../context/AuthorizationContext'
+
 import {
   CButton,
   CCard,
@@ -17,6 +19,18 @@ import {
 import CIcon from '@coreui/icons-react'
 
 const Login = () => {
+
+  const { authorization, setAuthorization } = useContext( AuthorizationContext )
+
+  const [ credentials, setCredentials ] = useState({
+    username: "",
+    password: ""
+  })
+
+  useEffect(() => {
+    console.log(`Alteração no Context ${authorization}`)
+  }, [authorization])
+
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
       <CContainer>
@@ -34,7 +48,9 @@ const Login = () => {
                           <CIcon name="cil-user" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="text" placeholder="Username" autoComplete="username" />
+                      <CInput type="text" placeholder="Username" autoComplete="username" onChange={e => {
+                        setCredentials( { ...credentials, username: e.target.value } )
+                      }} />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupPrepend>
@@ -42,11 +58,20 @@ const Login = () => {
                           <CIcon name="cil-lock-locked" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="password" placeholder="Password" autoComplete="current-password" />
+                      <CInput type="password" placeholder="Password" autoComplete="current-password" onChange={e => {
+                        setCredentials({ ...credentials, password: e.target.value })
+                      }} />
                     </CInputGroup>
                     <CRow>
                       <CCol xs="6">
-                        <CButton color="primary" className="px-4">Login</CButton>
+                        <CButton color="primary" className="px-4" onClick={e => {
+                          axios.post('/library/user/auth', {
+                            email: credentials.username,
+                            senha: credentials.password
+                          }).then(response => {
+                            setAuthorization(true)
+                          })
+                        }}>Login</CButton>
                       </CCol>
                     </CRow>
                   </CForm>
