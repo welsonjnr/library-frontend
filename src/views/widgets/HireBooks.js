@@ -35,7 +35,7 @@ const HireBooks = (props) => {
                   <CInput id="titulo" placeholder="Título do livro" required/>
                 </CCol>
                 <CCol xl="2" lg="2" sm="2" md="2">
-                  <CButton block color="success" className="mb-0 mt-4">Pesquisar</CButton>
+                  <CButton block color="success" className="mb-0" style={{marginTop: "29px"}}>Pesquisar</CButton>
                 </CCol>
               </CRow>
             </CFormGroup>

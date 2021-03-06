@@ -32,7 +32,7 @@ const Dashboard = () => {
       <CCard>
         <CRow>
           <CCol>
-            <EmprestimoLivro/>
+            < EmprestimoLivro/>
           </CCol>
         </CRow>
       </CCard>
