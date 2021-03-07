@@ -55,7 +55,7 @@ const Emprestimo = () => {
                                             <CInput id="nomeLivroEmprestimo" placeholder="Insira o título do livro" />
                                         </CCol>
                                         <CCol xs="1">
-                                            <CButton type="reset" color="success" style={{marginTop: '27px'}}><CIcon name="cil-search" /></CButton>
+                                            <CButton type="reset" color="success" style={{marginTop: '27px'}}><CIcon name="cil-search" title="Pesquisar"/></CButton>
                                         </CCol>
                                     </CFormGroup>
                                     <CFormGroup>
@@ -93,7 +93,7 @@ const Emprestimo = () => {
                                             <CInput id="cpfClienteEmprestimo" placeholder="Insira o nome do cliente" />
                                         </CCol>
                                         <CCol xs="1">
-                                            <CButton type="reset" color="success" style={{marginTop: '27px'}}><CIcon name="cil-search" /></CButton>
+                                            <CButton type="reset" color="success" style={{marginTop: '27px'}}><CIcon name="cil-search" title="Pesquisar"/></CButton>
                                         </CCol>
                                     </CFormGroup>
                                     <CFormGroup>
