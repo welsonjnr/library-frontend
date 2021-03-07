@@ -16,14 +16,14 @@ import ChartLineSimple from "../charts/ChartLineSimple";
 import {DocsLink} from "../../reusable";
 import usersData from "../users/UsersData";
 
-const Clientes = (props) => {
+const Livro = (props) => {
 
   return (
     <>
       {/*<CCol xs="12" lg="6">*/}
 
       <CCardHeader>
-        Clientes
+        Livros
       </CCardHeader>
       <CCardBody>
         <CRow>
@@ -32,9 +32,9 @@ const Clientes = (props) => {
               <CRow>
                 <CCol>
                   <CLabel htmlFor="titulo">Pesquisar</CLabel>
-                  <CInput id="filtroClienteByNome" placeholder="Nome do cliente" />
+                  <CInput id="filtroLivroByNome" placeholder="Nome do livro" />
                 </CCol>
-                <CCol xl="2" lg="2" sm="2" md="2" >
+                <CCol xl="2" lg="2" sm="2" md="2">
                   <CButton block color="success" className="mb-0" style={{marginTop: '29px'}}>Pesquisar</CButton>
                 </CCol>
                 <CCol xl="2" lg="2" sm="2" md="2">
@@ -50,10 +50,10 @@ const Clientes = (props) => {
         <CCardBody>
           <CDataTable
             items={[
-              {ID: 0, nome: 'Claudio Potter', email: "a@gmail.com", instituição:"UEG", curso: "Adimnistração", periodo: 2, status: "Disponível"},
-              {ID: 1, nome: 'João Potter', email: "j@gmail.com", instituição:"SLMB", curso: "Análise", periodo: 3, status: "Esgotado"}
+              {ID: 0, título: 'Claudio Potter', autor: "a@gmail.com", edição:"UEG", status: "Adimnistração", quantidade: 2, categoria: "Disponível"},
+              {ID: 1, título: 'João Potter', autor: "j@gmail.com", edição:"SLMB", status: "Análise", quantidade: 3, categoria: "Esgotado"}
             ]}
-            fields={['ID', 'nome', 'email', 'curso', 'instituição', 'periodo', 'status', 'ações']}
+            fields={['ID', 'título', 'autor', 'edição','status', 'quantidade', 'categoria','ações']}
             itemsPerPage={5}
             pagination
             scopedSlots={{
@@ -68,8 +68,8 @@ const Clientes = (props) => {
                 'ações':
                 (item) => (
                     <td>
-                      <CButton type="submit" color="primary"><CIcon name="cil-pencil" title="Editar"/></CButton>
-                      <CButton type="reset" color="danger"><CIcon name="cil-trash" title="Excluir"/></CButton>
+                      <CButton type="submit" color="primary"><CIcon name="cil-pencil" /></CButton>
+                      <CButton type="reset" color="danger"><CIcon name="cil-trash" /></CButton>
                     </td>
                 )
             }}
@@ -83,4 +83,4 @@ const Clientes = (props) => {
   )
 }
 
-export default Clientes
+export default Livro
