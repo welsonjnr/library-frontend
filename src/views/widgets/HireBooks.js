@@ -16,12 +16,21 @@ import {
 const HireBooks = (props) => {
 
   const [bookList, setBookList] = useState([]);
+  const [search, setSearch] = useState("");
+
 
   useEffect(function loadAll() {
     Api.listAllBooksToHire()
       .then(bookList => setBookList(bookList))
       .catch(e => Error(e))
   }, [])
+
+  function searchBooks() {
+    Api.listAllBooksToHireSearch("name", search)
+      .then(bookList => {
+        setBookList(bookList);
+      })
+  }
 
   return (
     <>
@@ -37,13 +46,23 @@ const HireBooks = (props) => {
                 <CRow>
                   <CCol>
                     <CLabel htmlFor="titulo">Pesquisar</CLabel>
-                    <CInput id="titulo" placeholder="Título do livro" required/>
+                    <CInput id="titulo"
+                            onChange={(e) => setSearch(e.target.value)}
+                            onKeyPress={(e) => {
+                              if (e.key === "Enter") {
+                                searchBooks()
+                              }
+                            }}
+                            placeholder="Título do livro"
+                            required/>
                   </CCol>
                   <CCol xl="2" lg="2" sm="2" md="2">
                     <CButton block
                              color="success"
                              className="mb-0"
-                             style={{marginTop: "29px"}}>Pesquisar</CButton>
+                             style={{marginTop: "29px"}}
+                             onClick={() => searchBooks()}
+                    >Pesquisar</CButton>
                   </CCol>
                 </CRow>
               </CFormGroup>
@@ -62,15 +81,13 @@ const HireBooks = (props) => {
               status:
                 (item) => (
                   <td>
-                    <CBadge color="primary">
-                      {item.status}
-                    </CBadge>
+                    <CBadge color="primary">{item.status}</CBadge>
                   </td>
                 ),
               alugar: (item, index) => (
-                <CBadge>
+                <td>
                   <CButton variant="outline" color="primary" size="sm">Alugar</CButton>
-                </CBadge>
+                </td>
               )
             }}
           />
