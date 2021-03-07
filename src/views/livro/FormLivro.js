@@ -71,9 +71,9 @@ const FormLivro = () => {
                       <option value="3">Ficção</option>
                       <option value="4">Autoajuda</option>
                       <option value="5">História</option>
-                      <option value="5">Esporte</option>
-                      <option value="5">Linguagens</option>
-                      <option value="6">Outros</option>
+                      <option value="6">Esporte</option>
+                      <option value="7">Linguagens</option>
+                      <option value="8">Outros</option>
                     </CSelect>
                   </CFormGroup>
             </CCardBody>

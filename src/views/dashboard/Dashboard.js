@@ -37,7 +37,6 @@ const Dashboard = () => {
         </CRow>
       </CCard>
 
-
       {/*<WidgetsDropdown />*/}
       {/*<CCard>*/}
       {/*  <CCardBody>*/}
