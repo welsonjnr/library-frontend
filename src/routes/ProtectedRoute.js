@@ -8,7 +8,7 @@ const ProtectedRoute = (props) => {
 
   const { authorization } = useContext( AuthorizationContext )
 
-  return authorization ? <Route {...props}>
+  return !authorization ? <Route {...props}>
     {props.children}
     </Route> : <Redirect to="/login"/>
 }
