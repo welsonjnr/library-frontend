@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import * as Api from '../../common/axios'
 import {
   CRow,
   CCol,
@@ -11,57 +12,66 @@ import {
   CFormGroup,
   CLabel, CInput, CButton
 } from "@coreui/react";
-import CIcon from "@coreui/icons-react";
-import ChartLineSimple from "../charts/ChartLineSimple";
-import {DocsLink} from "../../reusable";
-import usersData from "../users/UsersData";
 
 const HireBooks = (props) => {
+
+  const [bookList, setBookList] = useState([]);
+
+  useEffect(function loadAll() {
+    Api.listAllBooksToHire()
+      .then(bookList => setBookList(bookList))
+      .catch(e => Error(e))
+  }, [])
 
   return (
     <>
       {/*<CCol xs="12" lg="6">*/}
-
-      <CCardHeader>
-        Livros
-      </CCardHeader>
-      <CCardBody>
-        <CRow>
-          <CCol xs="12">
-            <CFormGroup>
-              <CRow>
-                <CCol>
-                  <CLabel htmlFor="titulo">Pesquisar</CLabel>
-                  <CInput id="titulo" placeholder="Título do livro" required/>
-                </CCol>
-                <CCol xl="2" lg="2" sm="2" md="2">
-                  <CButton block color="success" className="mb-0" style={{marginTop: "29px"}}>Pesquisar</CButton>
-                </CCol>
-              </CRow>
-            </CFormGroup>
-          </CCol>
-        </CRow>
-      </CCardBody>
-
       <CCard>
+        <CCardHeader>
+          Livros
+        </CCardHeader>
+        <CCardBody>
+          <CRow>
+            <CCol xs="12">
+              <CFormGroup>
+                <CRow>
+                  <CCol>
+                    <CLabel htmlFor="titulo">Pesquisar</CLabel>
+                    <CInput id="titulo" placeholder="Título do livro" required/>
+                  </CCol>
+                  <CCol xl="2" lg="2" sm="2" md="2">
+                    <CButton block
+                             color="success"
+                             className="mb-0"
+                             style={{marginTop: "29px"}}>Pesquisar</CButton>
+                  </CCol>
+                </CRow>
+              </CFormGroup>
+            </CCol>
+          </CRow>
+        </CCardBody>
+
+
         <CCardBody>
           <CDataTable
-            items={[
-              {id: 0, título: 'Harry Potter', edição: "2", autor: "Author", quantidade: 2, status: "Disponível"},
-              {id: 1, título: 'Harry Potter', edição: "2", autor: "Author", quantidade: 3, status: "Esgotado"}
-            ]}
-            fields={['título', 'edição', 'autor', 'status', 'quantidade', '']}
+            items={bookList}
+            fields={['título', 'edição', 'autor', 'status', 'quantidade', 'alugar']}
             itemsPerPage={5}
             pagination
             scopedSlots={{
-              'status':
+              status:
                 (item) => (
                   <td>
                     <CBadge color="primary">
                       {item.status}
                     </CBadge>
                   </td>
-                )
+                ),
+              alugar: (item, index) => (
+                <CBadge>
+                  <CButton variant="outline" color="primary" size="sm">Alugar</CButton>
+                </CBadge>
+              )
             }}
           />
         </CCardBody>

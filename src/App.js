@@ -30,7 +30,7 @@ const App = () => {
           <React.Suspense fallback={loading}>
             <Switch>
               <Route exact path="/register" name="Register Page" render={props => <Register {...props}/>} />
-              <LoginRoute exact path="/login" name="Login Page" render={props => <Login {...props}/>} />
+              <LoginRoute exact path="/login" name="Login Page" redirect="/dashboard" render={props => <Login {...props}/>} />
 
               <ProtectedRoute path="/" name="Home" redirect="/login" isAuthenticated={isAuthenticated} render={props => <TheLayout {...props}/>} />
             </Switch>
