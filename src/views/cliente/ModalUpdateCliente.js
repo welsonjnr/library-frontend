@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import InputMask from "react-input-mask";
 import {
   CButton,
   CCard,
@@ -34,20 +35,21 @@ import {
 import CIcon from '@coreui/icons-react'
 import { DocsLink } from 'src/reusable'
 
-const FormCliente = () => {
+const ModalFormLivro = (props) => {
   const [collapsed, setCollapsed] = React.useState(true)
   const [showElements, setShowElements] = React.useState(true)
+
   return (
     <>
       <CRow>
         <CCol xs="12" sm="12">
           <CCard>
             <CCardHeader>
-              Cadastro Cliente
+              Cliente
             </CCardHeader>
             <CCardBody>
               <CFormGroup>
-                <CLabel htmlFor="nome">Cliente</CLabel>
+                <CLabel htmlFor="nome">Nome</CLabel>
                 <CInput id="nomeCliente" placeholder="Insira o nome do cliente" />
               </CFormGroup>
               <CFormGroup>
@@ -68,13 +70,9 @@ const FormCliente = () => {
               </CFormGroup>
               <CFormGroup>
                 <CLabel htmlFor="periodo">Período</CLabel>
-                <CInput id="periodoCliente" placeholder="Insira o período do cliente" />
+                <CInput id="periodoCliente" type="number" min="0" max="16" placeholder="Insira o período do cliente" />
               </CFormGroup>
             </CCardBody>
-            <CCardFooter>
-              <CButton type="submit" color="primary"><CIcon name="cil-scrubber" /> Salvar</CButton>
-              <CButton type="reset" color="danger" className="ml-2"><CIcon name="cil-ban" /> Cancelar</CButton>
-            </CCardFooter>
           </CCard>
         </CCol>
       </CRow>
@@ -82,4 +80,4 @@ const FormCliente = () => {
   )
 }
 
-export default FormCliente
+export default ModalFormLivro
