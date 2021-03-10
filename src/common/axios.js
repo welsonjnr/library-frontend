@@ -16,7 +16,8 @@ export function listAllBooksToHire() {
             edição: book.edition,
             autor: book.author,
             quantidade: book.amount,
-            status: book.category.name
+            categoria: book.category.name,
+            status: book.bookStatus
           }));
 
         resolve(formattedList);
@@ -39,7 +40,8 @@ export function listAllBooksToHireSearch(queryParam, content) {
             edição: book.edition,
             autor: book.author,
             quantidade: book.amount,
-            status: book.category.name
+            categoria: book.category.name,
+            status: book.bookStatus
           }));
 
         resolve(formattedList);

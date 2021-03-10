@@ -1,4 +1,9 @@
-import React, { useState } from 'react';
+import React, {useState, useEffect} from 'react';
+import { Redirect } from 'react-router-dom';
+import ChartLineSimple from "../charts/ChartLineSimple";
+import { DocsLink } from "../../reusable";
+import usersData from "../users/UsersData";
+import ModalUpdateLivro from "../livro/ModalUpdateLivro"
 import {
   CRow,
   CCol,
@@ -18,52 +23,79 @@ import {
 } from "@coreui/react";
 
 import CIcon from "@coreui/icons-react";
-import ChartLineSimple from "../charts/ChartLineSimple";
-import { DocsLink } from "../../reusable";
-import usersData from "../users/UsersData";
-import ModalUpdateLivro from "../livro/ModalUpdateLivro"
+import * as Api from "../../common/axios";
 
 const Livro = (props) => {
 
   const [danger, setDanger] = useState(false)
   const [modal, setModal] = useState(false)
-  
+
+  const [bookList, setBookList] = useState([]);
+  const [search, setSearch] = useState("");
+
+
+  function searchBooks() {
+    Api.listAllBooksToHireSearch("name", search)
+      .then(bookList => {
+        setBookList(bookList)
+      });
+  }
+
+  useEffect(function loadAll() {
+    const mounted = true;
+    if (mounted)
+      searchBooks();
+  }, [])
+
   return (
     <>
       {/*<CCol xs="12" lg="6">*/}
       <CCard>
-      <CCardHeader>
-        Livros
-      </CCardHeader>
-      <CCardBody>
-        <CRow>
-          <CCol xs="12">
-            <CFormGroup>
-              <CRow>
-                <CCol>
-                  <CLabel htmlFor="titulo">Pesquisar</CLabel>
-                  <CInput id="filtroLivroByNome" placeholder="Nome do livro" />
-                </CCol>
-                <CCol xl="2" lg="2" sm="2" md="2">
-                  <CButton block color="success" className="mb-0" style={{ marginTop: '29px' }}>Pesquisar</CButton>
-                </CCol>
-                <CCol xl="2" lg="2" sm="2" md="2">
-                  <CButton block color="primary" className="mb-0" style={{ marginTop: '29px' }}>Novo</CButton>
-                </CCol>
-              </CRow>
-            </CFormGroup>
-          </CCol>
-        </CRow>
-      </CCardBody>
+        <CCardHeader>
+          Livros
+        </CCardHeader>
+        <CCardBody>
+          <CRow>
+            <CCol xs="12">
+              <CFormGroup>
+                <CRow>
+                  <CCol>
+                    <CLabel htmlFor="titulo">Pesquisar</CLabel>
+                    <CInput id="filtroLivroByNome"
+                            onChange={(e) => setSearch(e.target.value)}
+                            onKeyPress={(e) => {
+                              if (e.key === "Enter") {
+                                searchBooks()
+                              }
+                            }}
+                            placeholder="Nome do livro"/>
+                  </CCol>
+                  <CCol xl="2" lg="2" sm="2" md="2">
+                    <CButton block
+                             color="success"
+                             className="mb-0"
+                             style={{marginTop: '29px'}}
+                             onClick={() => searchBooks()}
+                    >Pesquisar</CButton>
+                  </CCol>
+                  <CCol xl="2" lg="2" sm="2" md="2">
+                    <CButton block
+                             color="primary"
+                             className="mb-0"
+                             style={{marginTop: '29px'}}
+                             onClick={(e) => window.location.href="/#/cadastro-livro"}
+                    >Novo</CButton>
+                  </CCol>
+                </CRow>
+              </CFormGroup>
+            </CCol>
+          </CRow>
+        </CCardBody>
 
-      <CCard>
         <CCardBody>
           <CDataTable
-            items={[
-              { ID: 0, título: 'Claudio Potter', autor: "a@gmail.com", edição: "UEG", status: "Adimnistração", quantidade: 2, categoria: "Disponível" },
-              { ID: 1, título: 'João Potter', autor: "j@gmail.com", edição: "SLMB", status: "Análise", quantidade: 3, categoria: "Esgotado" }
-            ]}
-            fields={['ID', 'título', 'autor', 'edição', 'status', 'quantidade', 'categoria', 'ações']}
+            items={bookList}
+            fields={['id', 'título', 'autor', 'edição', 'status', 'quantidade', 'categoria', 'ações']}
             itemsPerPage={5}
             pagination
             scopedSlots={{
@@ -85,7 +117,6 @@ const Livro = (props) => {
             }}
           />
         </CCardBody>
-      </CCard>
       </CCard>
 
       <CModal
