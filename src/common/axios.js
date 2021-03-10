@@ -40,7 +40,7 @@ export function listAllBooksToHireSearch(queryParam, content) {
             edição: book.edition,
             autor: book.author,
             quantidade: book.amount,
-            categoria: book.category.name,
+            categoria: book.category,
             status: book.bookStatus
           }));
 
@@ -52,7 +52,14 @@ export function listAllBooksToHireSearch(queryParam, content) {
   })
 };
 
+export function updateBook(book) {
+  return new Promise((resolve, reject) => {
+    instance.put(`/library/books/${book.id}`, { ...book })
+      .then( _ => { resolve(); })
+      .catch(err => {
+        reject(err);
+      });
+  })
+};
 
-
-
-    export default instance;
+export default instance;

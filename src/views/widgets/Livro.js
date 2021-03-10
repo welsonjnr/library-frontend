@@ -1,8 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import { Redirect } from 'react-router-dom';
-import ChartLineSimple from "../charts/ChartLineSimple";
-import { DocsLink } from "../../reusable";
-import usersData from "../users/UsersData";
 import ModalUpdateLivro from "../livro/ModalUpdateLivro"
 import {
   CRow,
@@ -35,11 +31,28 @@ const Livro = (props) => {
   const [bookList, setBookList] = useState([]);
   const [search, setSearch] = useState("");
 
+  const [formData, setFormData] = useState(
+    {
+      id: "",
+      name: "",
+      author: "",
+      edition: "",
+      amount: "",
+      category: ""
+    }
+  )
+
+  function updateBook() {
+    Api.updateBook(formData).then(res => {
+      searchBooks();
+      setModal(false);
+    });
+  }
 
   function searchBooks() {
     Api.listAllBooksToHireSearch("name", search)
       .then(bookList => {
-        setBookList(bookList)
+        setBookList(bookList.map(book => ({ ...book, categoria: book.categoria.name })))
       });
   }
 
@@ -112,7 +125,19 @@ const Livro = (props) => {
               'ações':
                 (item) => (
                   <td>
-                    <CButton type="submit" color="primary" onClick={() => setModal(!modal)}><CIcon name="cil-pencil" title="Editar" /></CButton>
+                    <CButton type="submit"
+                             color="primary"
+                             onClick={() => {
+                               setModal(!modal)
+                               setFormData({
+                                 id: item.id,
+                                 name: item.título,
+                                 author: item.autor,
+                                 edition: item.edição,
+                                 amount: item.quantidade,
+                                 category: item.categoria.id
+                               })
+                             }}><CIcon name="cil-pencil"title="Editar" /></CButton>
                     <CButton type="reset" color="danger" onClick={() => setDanger(!danger)}><CIcon name="cil-trash" title="Excluir" /></CButton>
                   </td>
                 )
@@ -146,10 +171,18 @@ const Livro = (props) => {
           <CModalTitle>Edição</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          <ModalUpdateLivro />
+          <ModalUpdateLivro
+            setFormData={setFormData}
+            formData={formData}
+            />
         </CModalBody>
         <CModalFooter>
-          <CButton color="primary">Salvar</CButton>{' '}
+          <CButton
+            color="primary"
+            onClick={e => {
+              updateBook();
+            }}
+          >Salvar</CButton>
           <CButton
             color="secondary"
             onClick={() => setModal(false)}

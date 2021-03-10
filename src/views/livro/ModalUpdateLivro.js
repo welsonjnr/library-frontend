@@ -1,42 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import {
   CButton,
   CCard,
   CCardBody,
-  CCardFooter,
   CCardHeader,
   CCol,
-  CCollapse,
-  CDropdownItem,
-  CDropdownMenu,
-  CDropdownToggle,
-  CFade,
-  CForm,
   CFormGroup,
-  CFormText,
-  CValidFeedback,
-  CInvalidFeedback,
-  CTextarea,
   CInput,
-  CInputFile,
-  CInputCheckbox,
-  CInputRadio,
-  CInputGroup,
-  CInputGroupAppend,
-  CInputGroupPrepend,
-  CDropdown,
-  CInputGroupText,
   CLabel,
   CSelect,
-  CRow,
-  CSwitch
+  CRow
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { DocsLink } from 'src/reusable'
 
 const ModalFormLivro = (props) => {
-  const [collapsed, setCollapsed] = React.useState(true)
-  const [showElements, setShowElements] = React.useState(true)
 
   return (
     <>
@@ -49,31 +25,55 @@ const ModalFormLivro = (props) => {
             <CCardBody>
               <CFormGroup>
                 <CLabel htmlFor="nomelivro">Livro</CLabel>
-                <CInput id="nomeLivro" placeholder="Insira com o nome do livro" />
+                <CInput
+                  id="nomeLivro"
+                  placeholder="Insira com o nome do livro"
+                  value={props.formData.name}
+                  onChange={e => props.setFormData({ ...props.formData, name: e.target.value })}
+                />
               </CFormGroup>
               <CFormGroup>
                 <CLabel htmlFor="autor">Autor</CLabel>
-                <CInput id="autorLivro" placeholder="Insira com o autor do livro" />
+                <CInput id="autorLivro"
+                        placeholder="Insira com o autor do livro"
+                        value={props.formData.author}
+                        onChange={e => props.setFormData({ ...props.formData, author: e.target.value })}
+                />
               </CFormGroup>
               <CFormGroup>
                 <CLabel htmlFor="edicao">Edição</CLabel>
-                <CInput id="edicaoLivro" placeholder="Insira a edição do livro" />
+                <CInput id="edicaoLivro"
+                        placeholder="Insira a edição do livro"
+                        value={props.formData.edition}
+                        onChange={e => props.setFormData({ ...props.formData, edition: e.target.value })}
+                />
               </CFormGroup>
               <CFormGroup>
                 <CLabel htmlFor="quantidadeLivro">Quantidade de Livros</CLabel>
-                <CInput id="quantidadeLivro" placeholder="Insira a quantidade do livro" />
+                <CInput id="quantidadeLivro"
+                        placeholder="Insira a quantidade do livro"
+                        value={props.formData.amount}
+                        onChange={e => props.setFormData({ ...props.formData, amount: e.target.value })}
+                />
               </CFormGroup>
               <CFormGroup>
                     <CLabel htmlFor="categorias">Categorias</CLabel>
-                    <CSelect custom name="categoriasLivro" id="categoriasLivro">
-                      <option value="1">Literatura</option>
-                      <option value="2">Financias</option>
-                      <option value="3">Ficção</option>
-                      <option value="4">Autoajuda</option>
-                      <option value="5">História</option>
-                      <option value="6">Esporte</option>
-                      <option value="7">Linguagens</option>
-                      <option value="8">Outros</option>
+                    <CSelect
+                      custom
+                      name="categoriasLivro"
+                      id="categoriasLivro"
+                      onChange={e => {
+                        console.log(e.target.value)
+                      }}
+                    >
+                      <option value="Literatura">Literatura</option>
+                      <option value="Financias">Financias</option>
+                      <option value="Ficção">Ficção</option>
+                      <option value="Autoajuda">Autoajuda</option>
+                      <option value="História">História</option>
+                      <option value="Esporte">Esporte</option>
+                      <option value="Linguagens">Linguagens</option>
+                      <option value="Outros">Outros</option>
                     </CSelect>
                   </CFormGroup>
             </CCardBody>
