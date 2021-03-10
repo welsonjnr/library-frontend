@@ -45,7 +45,7 @@ const FormLivro = () => {
         <CCol xs="12" sm="12">
           <CCard>
             <CCardHeader>
-              Cadastro Livro
+              Livro
             </CCardHeader>
             <CCardBody>
               <CFormGroup>
@@ -78,10 +78,6 @@ const FormLivro = () => {
                     </CSelect>
                   </CFormGroup>
             </CCardBody>
-            <CCardFooter>
-              <CButton type="submit"  color="primary"><CIcon name="cil-scrubber" /> Salvar</CButton>
-              <CButton type="reset" color="danger" className="ml-2"><CIcon name="cil-ban" /> Cancelar</CButton>
-            </CCardFooter>
           </CCard>
         </CCol>
       </CRow>
