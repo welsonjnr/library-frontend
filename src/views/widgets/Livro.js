@@ -24,11 +24,13 @@ import {
 
 import CIcon from "@coreui/icons-react";
 import * as Api from "../../common/axios";
+import FormLivro from '../livro/FormLivro';
 
 const Livro = (props) => {
 
   const [danger, setDanger] = useState(false)
   const [modal, setModal] = useState(false)
+  const [modalInsert, setModalInsert] = useState(false)
 
   const [bookList, setBookList] = useState([]);
   const [search, setSearch] = useState("");
@@ -83,7 +85,7 @@ const Livro = (props) => {
                              color="primary"
                              className="mb-0"
                              style={{marginTop: '29px'}}
-                             onClick={(e) => window.location.href="/#/cadastro-livro"}
+                             onClick={() => setModalInsert(!modalInsert)}
                     >Novo</CButton>
                   </CCol>
                 </CRow>
@@ -151,6 +153,25 @@ const Livro = (props) => {
           <CButton
             color="secondary"
             onClick={() => setModal(false)}
+          >Cancelar</CButton>
+        </CModalFooter>
+      </CModal>
+
+      <CModal
+        show={modalInsert}
+        onClose={setModalInsert}
+      >
+        <CModalHeader closeButton>
+          <CModalTitle>Cadastro</CModalTitle>
+        </CModalHeader>
+        <CModalBody>
+          <FormLivro />
+        </CModalBody>
+        <CModalFooter>
+          <CButton color="primary">Salvar</CButton>{' '}
+          <CButton
+            color="secondary"
+            onClick={() => setModalInsert(false)}
           >Cancelar</CButton>
         </CModalFooter>
       </CModal>

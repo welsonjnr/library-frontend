@@ -43,12 +43,12 @@ const FormCliente = () => {
         <CCol xs="12" sm="12">
           <CCard>
             <CCardHeader>
-              Cadastro Cliente
+              Cliente
             </CCardHeader>
             <CCardBody>
               <CFormGroup>
-                <CLabel htmlFor="nome">Cliente</CLabel>
-                <CInput id="nomeCliente" placeholder="Insira o nome do cliente" />
+                <CLabel htmlFor="nome">Nome</CLabel>
+                <CInput id="nomeCliente" placeholder="Insira o nome do cliente"/>
               </CFormGroup>
               <CFormGroup>
                 <CLabel htmlFor="cpf">CPF</CLabel>
@@ -71,10 +71,6 @@ const FormCliente = () => {
                 <CInput id="periodoCliente" placeholder="Insira o período do cliente" />
               </CFormGroup>
             </CCardBody>
-            <CCardFooter>
-              <CButton type="submit" color="primary"><CIcon name="cil-scrubber" /> Salvar</CButton>
-              <CButton type="reset" color="danger" className="ml-2"><CIcon name="cil-ban" /> Cancelar</CButton>
-            </CCardFooter>
           </CCard>
         </CCol>
       </CRow>

@@ -22,11 +22,13 @@ import { DocsLink } from "../../reusable";
 import usersData from "../users/UsersData";
 import FormLivro from '../livro/FormLivro';
 import ModalUpdateCliente from '../cliente/ModalUpdateCliente'
+import FormCliente from '../cliente/FormCliente';
 
 const Clientes = (props) => {
 
   const [danger, setDanger] = useState(false)
   const [modal, setModal] = useState(false)
+  const [modalInsert, setModalInsert] = useState(false)
 
   return (
     <>
@@ -48,7 +50,7 @@ const Clientes = (props) => {
                   <CButton block color="success" className="mb-0" style={{ marginTop: '29px' }}>Pesquisar</CButton>
                 </CCol>
                 <CCol xl="2" lg="2" sm="2" md="2">
-                  <CButton block color="primary" className="mb-0" style={{ marginTop: '29px' }}>Novo</CButton>
+                  <CButton block color="primary" className="mb-0" style={{ marginTop: '29px' }} onClick={() => setModalInsert(!modalInsert)}>Novo</CButton>
                 </CCol>
               </CRow>
             </CFormGroup>
@@ -123,6 +125,25 @@ const Clientes = (props) => {
           <CButton
             color="secondary"
             onClick={() => setModal(false)}
+          >Cancelar</CButton>
+        </CModalFooter>
+      </CModal>
+
+      <CModal
+        show={modalInsert}
+        onClose={setModalInsert}
+      >
+        <CModalHeader closeButton>
+          <CModalTitle>Cadastro</CModalTitle>
+        </CModalHeader>
+        <CModalBody>
+          <FormCliente />
+        </CModalBody>
+        <CModalFooter>
+          <CButton color="primary">Salvar</CButton>{' '}
+          <CButton
+            color="secondary"
+            onClick={() => setModalInsert(false)}
           >Cancelar</CButton>
         </CModalFooter>
       </CModal>
