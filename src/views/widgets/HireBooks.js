@@ -22,14 +22,11 @@ const HireBooks = (props) => {
   useEffect(function loadAll() {
     Api.listAllBooksToHire()
       .then(bookList => setBookList(bookList))
-      .catch(e => Error(e))
   }, [])
 
   function searchBooks() {
     Api.listAllBooksToHireSearch("name", search)
-      .then(bookList => {
-        setBookList(bookList);
-      })
+      .then(bookList => setBookList(bookList));
   }
 
   return (
