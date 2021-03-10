@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   CButton,
   CCard,
@@ -29,13 +29,12 @@ import {
   CLabel,
   CSelect,
   CRow,
-  CCallout,
   CSwitch
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { DocsLink } from 'src/reusable'
 
-const FormLivro = () => {
+const ModalFormLivro = (props) => {
   const [collapsed, setCollapsed] = React.useState(true)
   const [showElements, setShowElements] = React.useState(true)
 
@@ -45,7 +44,7 @@ const FormLivro = () => {
         <CCol xs="12" sm="12">
           <CCard>
             <CCardHeader>
-              Cadastro Livro
+              Livro
             </CCardHeader>
             <CCardBody>
               <CFormGroup>
@@ -62,7 +61,7 @@ const FormLivro = () => {
               </CFormGroup>
               <CFormGroup>
                 <CLabel htmlFor="quantidadeLivro">Quantidade de Livros</CLabel>
-                <CInput id="quantidadeLivro" placeholder="Insira a quantidade do livro" type="number"/>
+                <CInput id="quantidadeLivro" placeholder="Insira a quantidade do livro" />
               </CFormGroup>
               <CFormGroup>
                     <CLabel htmlFor="categorias">Categorias</CLabel>
@@ -78,10 +77,6 @@ const FormLivro = () => {
                     </CSelect>
                   </CFormGroup>
             </CCardBody>
-            <CCardFooter>
-              <CButton type="submit"  color="primary"><CIcon name="cil-scrubber" /> Salvar</CButton>
-              <CButton type="reset" color="danger" className="ml-2"><CIcon name="cil-ban" /> Cancelar</CButton>
-            </CCardFooter>
           </CCard>
         </CCol>
       </CRow>
@@ -89,4 +84,4 @@ const FormLivro = () => {
   )
 }
 
-export default FormLivro
+export default ModalFormLivro

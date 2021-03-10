@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
     CButton,
     CCard,
@@ -29,6 +29,13 @@ import {
     CLabel,
     CSelect,
     CRow,
+    CModal,
+    CModalBody,
+    CModalFooter,
+    CModalHeader,
+    CBadge,
+    CModalTitle,
+    CDataTable,
     CSwitch
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
@@ -36,6 +43,9 @@ import { DocsLink } from 'src/reusable'
 const Emprestimo = () => {
     const [collapsed, setCollapsed] = React.useState(true)
     const [showElements, setShowElements] = React.useState(true)
+
+    const [success, setSuccess] = useState(false)
+    const [info, setInfo] = useState(false)
 
     return (
         <>
@@ -55,7 +65,8 @@ const Emprestimo = () => {
                                             <CInput id="nomeLivroEmprestimo" placeholder="Insira o título do livro" />
                                         </CCol>
                                         <CCol xs="1">
-                                            <CButton type="reset" color="success" style={{marginTop: '27px'}}><CIcon name="cil-search" title="Pesquisar"/></CButton>
+                                            <CButton onClick={() => setSuccess(!success)} type="reset" color="success" style={{marginTop: '27px'}}>
+                                                <CIcon name="cil-search" title="Pesquisar" /></CButton>
                                         </CCol>
                                     </CFormGroup>
                                     <CFormGroup>
@@ -93,7 +104,8 @@ const Emprestimo = () => {
                                             <CInput id="cpfClienteEmprestimo" placeholder="Insira o nome do cliente" />
                                         </CCol>
                                         <CCol xs="1">
-                                            <CButton type="reset" color="success" style={{marginTop: '27px'}}><CIcon name="cil-search" title="Pesquisar"/></CButton>
+                                            <CButton onClick={() => setInfo(!info)} type="reset" color="success" style={{marginTop: '27px'}}>
+                                                <CIcon name="cil-search" title="Pesquisar"/></CButton>
                                         </CCol>
                                     </CFormGroup>
                                     <CFormGroup>
@@ -124,6 +136,111 @@ const Emprestimo = () => {
                     </CCard>
                 </CCol>
             </CRow>
+
+    
+    {/*Modal de informações dos livros*/}
+
+            <CModal
+        show={success}
+        onClose={() => setSuccess(!success)}
+        color="success"
+        size="lg"
+      >
+        <CModalHeader closeButton>
+          <CModalTitle>Livro</CModalTitle>
+        </CModalHeader>
+        <CModalBody>
+          
+        <CCard>
+        <CCardBody>
+          <CDataTable
+            items={[
+              { ID: 0, título: 'Claudio Potter', autor: "a@gmail.com",  status: "Adimnistração", quantidade: 2 },
+              { ID: 1, título: 'João Potter', autor: "j@gmail.com",  status: "Análise", quantidade: 3 }
+            ]}
+            fields={['ID', 'título', 'autor', 'status', 'quantidade', 'ações']}
+            itemsPerPage={5}
+            pagination
+            scopedSlots={{
+              'status':
+                (item) => (
+                  <td>
+                    <CBadge color="primary">
+                      {item.status}
+                    </CBadge>
+                  </td>
+                ),
+              'ações':
+                (item) => (
+                  <td>
+                      <CSwitch className={'mx-1'} variant={'3d'} color={'success'} labelOn={'\u2713'} labelOff={'\u2715'}/>
+                  </td>
+                )
+            }}
+          />
+        </CCardBody>
+      </CCard>
+
+        </CModalBody>
+        <CModalFooter>
+          <CButton color="success">Confirmar</CButton>{' '}
+          <CButton
+            color="secondary"
+            onClick={() => setSuccess(false)}
+          >Cancelar</CButton>
+        </CModalFooter>
+      </CModal>
+
+    {/*Modal de informações do cliente*/}
+
+      <CModal
+        show={info}
+        onClose={() => setInfo(!success)}
+        color="info"
+        size="lg"
+      >
+        <CModalHeader closeButton>
+          <CModalTitle>Cliente</CModalTitle>
+        </CModalHeader>
+        <CModalBody>
+        <CCard>
+        <CCardBody>
+          <CDataTable
+            items={[
+              { ID: 0, nome: 'Claudio Potter', email: "a@gmail.com", cpf:"12345678920", status: "Disponível" },
+              { ID: 1, nome: 'João Potter', email: "j@gmail.com", cpf:"12345678920", status: "Esgotado" }
+            ]}
+            fields={['ID', 'nome', 'email', 'cpf', 'status', 'ações']}
+            itemsPerPage={5}
+            pagination
+            scopedSlots={{
+              'status':
+                (item) => (
+                  <td>
+                    <CBadge color="primary">
+                      {item.status}
+                    </CBadge>
+                  </td>
+                ),
+              'ações':
+                (item) => (
+                  <td>
+                    <CSwitch className={'mx-1'} variant={'3d'} color={'info'} labelOn={'\u2713'} labelOff={'\u2715'}/>
+                  </td>
+                )
+            }}
+          />
+        </CCardBody>
+      </CCard>
+        </CModalBody>
+        <CModalFooter>
+          <CButton color="primary">Confirmar</CButton>{' '}
+          <CButton
+            color="secondary"
+            onClick={() => setInfo(false)}
+          >Cancelar</CButton>
+        </CModalFooter>
+      </CModal>
         </>
     )
 }

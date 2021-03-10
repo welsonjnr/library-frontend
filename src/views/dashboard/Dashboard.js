@@ -4,6 +4,7 @@ import HireBooks from "../widgets/HireBooks"
 import Emprestimo from "../widgets/Emprestimo"
 import EmprestimoLivro from "../emprestimo/Emprestimo"
 import Livro from "../widgets/Livro"
+import Modals from '../notifications/modals/Modals'
 import { CCard, CCardBody, CRow, CCol, CButton } from "@coreui/react";
 
 // import {
@@ -36,7 +37,6 @@ const Dashboard = () => {
           </CCol>
         </CRow>
       </CCard>
-
 
       {/*<WidgetsDropdown />*/}
       {/*<CCard>*/}

@@ -16,7 +16,6 @@ const routes = [
   { path: '/cadastro-livro', name: 'Novo Livro', component: FormLivro },
   { path: '/cadastro-cliente', name: 'Novo Cliente', component: FormCliente },
   { path: '/cadastro-emprestimo', name: 'Emprestimos', component: FormEmprestimo },
-
 ];
 
 export default routes;

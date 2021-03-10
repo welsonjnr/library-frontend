@@ -41,6 +41,13 @@ const _nav =  [
     name: 'Empréstimos',
     to: '/emprestimos',
     icon: 'cil-arrow-thick-from-bottom',
+  },
+  /*
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Modals',
+    to: '/modals',
+    icon: 'cil-arrow-thick-from-bottom',
   }, /*
   {
     _tag: 'CSidebarNavItem',
