@@ -52,7 +52,7 @@ const Livro = (props) => {
   function searchBooks() {
     Api.listAllBooksToHireSearch("name", search)
       .then(bookList => {
-        setBookList(bookList.map(book => ({ ...book, categoria: book.categoria.name })))
+        setBookList(bookList.map(book => ({ ...book, categoria: book.categoria})))
       });
   }
 
@@ -135,7 +135,7 @@ const Livro = (props) => {
                                  author: item.autor,
                                  edition: item.edição,
                                  amount: item.quantidade,
-                                 category: item.categoria.id
+                                 category: item.categoria
                                })
                              }}><CIcon name="cil-pencil"title="Editar" /></CButton>
                     <CButton type="reset" color="danger" onClick={() => setDanger(!danger)}><CIcon name="cil-trash" title="Excluir" /></CButton>

@@ -10,6 +10,7 @@ const User = ({match}) => {
     [['id', (<span><CIcon className="text-muted" name="cui-icon-ban" /> Not found</span>)]]
 
   return (
+    <>
     <CRow>
       <CCol lg={6}>
         <CCard>
@@ -35,6 +36,8 @@ const User = ({match}) => {
         </CCard>
       </CCol>
     </CRow>
+    <button>Criar novo usuário</button>
+    </>
   )
 }
 

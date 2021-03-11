@@ -21,7 +21,7 @@ const HireBooks = (props) => {
 
   useEffect(function loadAll() {
     Api.listAllBooksToHire()
-      .then(bookList => setBookList(bookList.map(book => ({ ...book, categoria: book.categoria.name }))))
+      .then(bookList => setBookList(bookList.map(book => ({ ...book, categoria: book.categoria}))))
   }, [])
 
   function searchBooks() {

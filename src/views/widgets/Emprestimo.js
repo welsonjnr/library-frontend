@@ -77,7 +77,7 @@ const Emprestimo = (props) => {
                   <td>
                     <CButton type="submit" color="primary"><CIcon name="cil-arrow-circle-bottom" title="Retornar" /></CButton>
                     <CButton type="submit" color="dark"><CIcon name="cil-reload" title="Renovar" /></CButton>
-                    <CButton type="reset" color="danger" onClick={() => setDanger(!danger)}><CIcon name="cil-trash" title="Excluir" /></CButton>
+                    <CButton type="reset" color="danger"><CIcon name="cil-trash" title="Excluir" onClick={() => setDanger(!danger)} /></CButton>
                   </td>
                 )
             }}
