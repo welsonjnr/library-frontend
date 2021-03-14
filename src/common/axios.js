@@ -16,7 +16,7 @@ export function listAllBooksToHire() {
             edição: book.edition,
             autor: book.author,
             quantidade: book.amount,
-            categoria: book.category.name,
+            categoria: book.category,
             status: book.bookStatus
           }));
 

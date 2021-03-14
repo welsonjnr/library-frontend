@@ -6,6 +6,7 @@ import Emprestimo from "./views/widgets/Emprestimo";
 import { default as FormEmprestimo } from "./views/emprestimo/Emprestimo"
 import FormLivro from "./views/livro/FormLivro";
 import FormCliente from "./views/cliente/FormCliente";
+import Usuario from './views/usuario/Usuario';
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -16,6 +17,7 @@ const routes = [
   { path: '/cadastro-livro', name: 'Novo Livro', component: FormLivro },
   { path: '/cadastro-cliente', name: 'Novo Cliente', component: FormCliente },
   { path: '/cadastro-emprestimo', name: 'Emprestimos', component: FormEmprestimo },
+  { path: '/minha-conta', name: 'Minha Conta', component: Usuario },
 ];
 
 export default routes;
