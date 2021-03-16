@@ -70,4 +70,47 @@ export function deleteBook(book) {
   })
 }
 
+export function listAllClientsToHireSearch(queryParam, content) {
+  return new Promise((resolve, reject) => {
+    instance.get(`/library/clients?${queryParam}=${content}`)
+      .then(({data}) => {
+        if (data.length === 0) resolve([]);
+        const formattedList = data.map(client =>
+          ({
+            id: client.id,
+            name: client.name,
+            cpf: client.cpf,
+            email: client.email,
+            status: client.status,
+            course: client.course,
+            institution: client.institution,
+            period: client.period
+          }));
+
+        resolve(formattedList);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  })
+};
+
+export function updateClient(client) {
+  return new Promise((resolve, reject) => {
+    instance.put(`/library/clients/${client.id}`, { ...client })
+      .then( _ => { resolve(); })
+      .catch(err => {
+        reject(err);
+      });
+  })
+};
+
+export function deleteClient(client) {
+  return new Promise((resolve, reject) => {
+    instance.delete(`/library/clients/${client.id}`)
+      .then(_ => resolve())
+      .catch(err => reject(err))
+  })
+}
+
 export default instance;
