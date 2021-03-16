@@ -98,7 +98,18 @@ const Livro = (props) => {
                              color="primary"
                              className="mb-0"
                              style={{marginTop: '29px'}}
-                             onClick={() => setModalInsert(!modalInsert)}
+                             onClick={() => {
+                               setFormData({
+                                 id: null,
+                                 name: "",
+                                 author: "",
+                                 edition: "",
+                                 amount: "",
+                                 category: ""
+                               })
+                               setModalInsert(!modalInsert)
+
+                             }}
                     >Novo</CButton>
                   </CCol>
                 </CRow>
@@ -111,7 +122,7 @@ const Livro = (props) => {
           <CDataTable
             items={bookList}
             fields={['id', 'título', 'autor', 'edição', 'status', 'quantidade', 'categoria', 'ações']}
-            itemsPerPage={5}
+            itemsPerPage={15}
             pagination
             scopedSlots={{
               'status':
@@ -214,10 +225,21 @@ const Livro = (props) => {
           <CModalTitle>Cadastro</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          <FormLivro/>
+          <ModalUpdateLivro
+            setFormData={setFormData}
+            formData={formData}
+          />
         </CModalBody>
         <CModalFooter>
-          <CButton color="primary">Salvar</CButton>{' '}
+          <CButton
+            color="primary"
+            onClick={() => {
+              Api.insertBook(formData).then(_ => {
+                searchBooks()
+                setModalInsert(!modalInsert)
+              })
+            }}
+          >Salvar</CButton>
           <CButton
             color="secondary"
             onClick={() => setModalInsert(false)}
