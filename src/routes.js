@@ -9,7 +9,7 @@ import FormCliente from "./views/cliente/FormCliente";
 import Usuario from './views/usuario/Usuario';
 
 const routes = [
-  { path: '/', exact: true, name: 'Home' },
+  { path: '/', exact: true, name: 'Home', component: HireBooks },
   { path: '/dashboard', name: 'Dashboard', component: HireBooks },
   { path: '/clientes', name: 'Clientes', component: Clientes },
   { path: '/livros', name: 'Livros', component: Livro },
