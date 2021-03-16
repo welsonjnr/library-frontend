@@ -17,9 +17,6 @@ import {
   CLabel, CInput, CButton
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-import ChartLineSimple from "../charts/ChartLineSimple";
-import { DocsLink } from "../../reusable";
-import usersData from "../users/UsersData";
 import ModalEmprestimo from "../emprestimo/Emprestimo"
 
 const Emprestimo = (props) => {

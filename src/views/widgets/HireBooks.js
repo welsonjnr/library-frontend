@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import * as Api from '../../common/axios'
+import ModalEmprestimo from "../emprestimo/Emprestimo"
 import {
   CRow,
   CCol,
@@ -10,6 +11,11 @@ import {
   CDataTable,
   CBadge,
   CFormGroup,
+  CModal,
+  CModalBody,
+  CModalFooter,
+  CModalHeader,
+  CModalTitle,
   CLabel, CInput, CButton
 } from "@coreui/react";
 
@@ -17,6 +23,7 @@ const HireBooks = (props) => {
 
   const [bookList, setBookList] = useState([]);
   const [search, setSearch] = useState("");
+  const [modalInsert, setModalInsert] = useState(false)
 
 
   useEffect(function loadAll() {
@@ -83,7 +90,10 @@ const HireBooks = (props) => {
                 ),
               alugar: (item, index) => (
                 <td>
-                  <CButton variant="outline" color="primary" size="sm">Alugar</CButton>
+                  <CButton variant="outline" 
+                          color="primary" 
+                          onClick={() => setModalInsert(!modalInsert)}
+                          size="sm">Alugar</CButton>
                 </td>
               )
             }}
@@ -91,6 +101,25 @@ const HireBooks = (props) => {
         </CCardBody>
       </CCard>
 
+      <CModal
+        show={modalInsert}
+        onClose={setModalInsert}
+        size="lg"
+      >
+        <CModalHeader closeButton>
+          <CModalTitle>Cadastro</CModalTitle>
+        </CModalHeader>
+        <CModalBody>
+          <ModalEmprestimo/>
+        </CModalBody>
+        <CModalFooter>
+          <CButton color="primary">Salvar</CButton>{' '}
+          <CButton
+            color="secondary"
+            onClick={() => setModalInsert(false)}
+          >Cancelar</CButton>
+        </CModalFooter>
+      </CModal>
 
       {/*</CCol>*/}
     </>
