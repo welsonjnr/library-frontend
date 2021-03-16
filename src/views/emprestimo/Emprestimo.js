@@ -129,10 +129,6 @@ const Emprestimo = () => {
                                 </CCardBody>
                             </CCard>
                         </CCardBody>
-                        <CCardFooter>
-                            <CButton type="submit" color="primary"><CIcon name="cil-scrubber" /> Salvar</CButton>
-                            <CButton type="reset" color="danger" className="ml-2"><CIcon name="cil-ban" /> Cancelar</CButton>
-                        </CCardFooter>
                     </CCard>
                 </CCol>
             </CRow>
