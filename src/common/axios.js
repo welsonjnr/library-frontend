@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: "http://localhost:8080"
+  baseURL: "https://studium-library.herokuapp.com/"
 });
 
 export function listAllBooksToHire() {
@@ -61,5 +61,13 @@ export function updateBook(book) {
       });
   })
 };
+
+export function deleteBook(book) {
+  return new Promise((resolve, reject) => {
+    instance.delete(`/library/books/${book.id}`)
+      .then(_ => resolve())
+      .catch(err => reject(err))
+  })
+}
 
 export default instance;

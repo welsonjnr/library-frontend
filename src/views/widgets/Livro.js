@@ -52,7 +52,7 @@ const Livro = (props) => {
   function searchBooks() {
     Api.listAllBooksToHireSearch("name", search)
       .then(bookList => {
-        setBookList(bookList.map(book => ({ ...book, categoria: book.categoria})))
+        setBookList(bookList.map(book => ({...book, categoria: book.categoria})))
       });
   }
 
@@ -137,8 +137,18 @@ const Livro = (props) => {
                                  amount: item.quantidade,
                                  category: item.categoria
                                })
-                             }}><CIcon name="cil-pencil"title="Editar" /></CButton>
-                    <CButton type="reset" color="danger" onClick={() => setDanger(!danger)}><CIcon name="cil-trash" title="Excluir" /></CButton>
+                             }}><CIcon name="cil-pencil" title="Editar"/></CButton>
+                    <CButton type="reset" color="danger" onClick={() => {
+                      setDanger(!danger)
+                      setFormData({
+                        id: item.id,
+                        name: item.título,
+                        author: item.autor,
+                        edition: item.edição,
+                        amount: item.quantidade,
+                        category: item.categoria
+                      })
+                    }}><CIcon name="cil-trash" title="Excluir"/></CButton>
                   </td>
                 )
             }}
@@ -156,9 +166,15 @@ const Livro = (props) => {
         </CModalHeader>
         <CModalBody>
           Deseja mesmo excluir o livro?
-              </CModalBody>
+        </CModalBody>
         <CModalFooter>
-          <CButton color="danger" onClick={() => setDanger(!danger)}>Sim</CButton>{' '}
+          <CButton color="danger" onClick={() => {
+            Api.deleteBook(formData).then(res => {
+              setBookList(bookList.filter(item => item.id !== formData.id))
+              setDanger(!danger)
+            })
+
+          }}>Sim</CButton>{' '}
           <CButton color="secondary" onClick={() => setDanger(!danger)}>Não</CButton>
         </CModalFooter>
       </CModal>
@@ -174,7 +190,7 @@ const Livro = (props) => {
           <ModalUpdateLivro
             setFormData={setFormData}
             formData={formData}
-            />
+          />
         </CModalBody>
         <CModalFooter>
           <CButton
@@ -198,7 +214,7 @@ const Livro = (props) => {
           <CModalTitle>Cadastro</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          <FormLivro />
+          <FormLivro/>
         </CModalBody>
         <CModalFooter>
           <CButton color="primary">Salvar</CButton>{' '}

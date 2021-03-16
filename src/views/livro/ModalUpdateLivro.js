@@ -62,9 +62,7 @@ const ModalFormLivro = (props) => {
                       custom
                       name="categoriasLivro"
                       id="categoriasLivro"
-                      onChange={e => {
-                        console.log(e.target.value)
-                      }}
+                      onChange={e => props.setFormData({ ...props.formData, category: e.target.value })}
                     >
                       <option value="Literatura">Literatura</option>
                       <option value="Financias">Financias</option>
