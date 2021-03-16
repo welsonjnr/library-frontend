@@ -52,6 +52,14 @@ export function listAllBooksToHireSearch(queryParam, content) {
   })
 };
 
+export function insertBook(book) {
+  return new Promise((resolve, reject) => {
+    instance.post('/library/books', book)
+      .then(_ => resolve())
+      .catch(e => reject(e))
+  })
+}
+
 export function updateBook(book) {
   return new Promise((resolve, reject) => {
     instance.put(`/library/books/${book.id}`, { ...book })
