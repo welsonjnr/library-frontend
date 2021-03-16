@@ -32,11 +32,10 @@ import {
   CSwitch
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { DocsLink } from 'src/reusable'
+import {DocsLink} from 'src/reusable'
 
-const FormCliente = () => {
-  const [collapsed, setCollapsed] = React.useState(true)
-  const [showElements, setShowElements] = React.useState(true)
+const FormCliente = (props) => {
+
   return (
     <>
       <CRow>
@@ -48,27 +47,54 @@ const FormCliente = () => {
             <CCardBody>
               <CFormGroup>
                 <CLabel htmlFor="nome">Nome</CLabel>
-                <CInput id="nomeCliente" placeholder="Insira o nome do cliente"/>
+                <CInput id="nomeCliente"
+                        placeholder="Insira o nome do cliente"
+                        value={props.formData.name}
+                        onChange={e => props.setFormData({...props.formData, name: e.target.value})}
+                />
               </CFormGroup>
               <CFormGroup>
                 <CLabel htmlFor="cpf">CPF</CLabel>
-                <CInput id="cpfCliente" placeholder="Insira o cpf do cliente" maxlength="11"/>
+                <CInput
+                  id="cpfCliente"
+                  placeholder="Insira o cpf do cliente"
+                  maxlength="11"
+                  value={props.formData.cpf}
+                  onChange={e => props.setFormData({...props.formData, cpf: e.target.value})}
+                />
               </CFormGroup>
               <CFormGroup>
                 <CLabel htmlFor="email">Email</CLabel>
-                <CInput id="emailCliente" placeholder="Insira o email do cliente" />
+                <CInput id="emailCliente"
+                        placeholder="Insira o email do cliente"
+                        value={props.formData.email}
+                        onChange={e => props.setFormData({...props.formData, email: e.target.value})}
+                />
               </CFormGroup>
               <CFormGroup>
                 <CLabel htmlFor="curso">Curso</CLabel>
-                <CInput id="cursoCliente" placeholder="Insira o curso do cliente" />
+                <CInput id="cursoCliente"
+                        placeholder="Insira o curso do cliente"
+                        value={props.formData.course}
+                        onChange={e => props.setFormData({...props.formData, course: e.target.value})}
+                />
               </CFormGroup>
               <CFormGroup>
                 <CLabel htmlFor="institution">Instituição</CLabel>
-                <CInput id="institutionCliente" placeholder="Insira a instituição do cliente" />
+                <CInput id="institutionCliente"
+                        value={props.formData.institution}
+                        placeholder="Insira a instituição do cliente"
+                        onChange={e => props.setFormData({...props.formData, institution: e.target.value})}
+                />
               </CFormGroup>
               <CFormGroup>
                 <CLabel htmlFor="periodo">Período</CLabel>
-                <CInput id="periodoCliente" placeholder="Insira o período do cliente" />
+                <CInput id="periodoCliente"
+                        value={props.formData.period}
+                        placeholder="Insira o período do cliente"
+                        onChange={e => props.setFormData({...props.formData, period: e.target.value})}
+                />
+
               </CFormGroup>
             </CCardBody>
           </CCard>

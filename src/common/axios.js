@@ -86,13 +86,13 @@ export function listAllClientsToHireSearch(queryParam, content) {
         const formattedList = data.map(client =>
           ({
             id: client.id,
-            name: client.name,
+            nome: client.name,
             cpf: client.cpf,
             email: client.email,
             status: client.status,
-            course: client.course,
-            institution: client.institution,
-            period: client.period
+            curso: client.course,
+            instituição: client.institution,
+            periodo: client.period
           }));
 
         resolve(formattedList);

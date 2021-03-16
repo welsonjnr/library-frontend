@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   CRow,
   CCol,
@@ -20,6 +20,7 @@ import CIcon from "@coreui/icons-react";
 import * as Api from "../../common/axios";
 import ModalUpdateCliente from '../cliente/ModalUpdateCliente'
 import FormCliente from '../cliente/FormCliente';
+import ModalUpdateLivro from "../livro/ModalUpdateLivro";
 
 const Clientes = (props) => {
 
@@ -30,17 +31,17 @@ const Clientes = (props) => {
   const [clientList, setClientList] = useState([]);
   const [search, setSearch] = useState("");
 
-  const [formData, setFormData] = useState(
-    {
-      id: "",
-      name: "",
-      cpf: "",
-      email: "",
-      course: "",
-      institution: "",
-      period:""
-    }
-  )
+  const [formData, setFormData] = useState({
+    id: "",
+    name: "",
+    cpf: "",
+    email: "",
+    course: "",
+    institution: "",
+    period: ""
+  })
+
+  useEffect(() => console.log(formData), [formData])
 
   function updateClient() {
     Api.updateClient(formData).then(res => {
@@ -66,98 +67,99 @@ const Clientes = (props) => {
     <>
       {/*<CCol xs="12" lg="6">*/}
       <CCard>
-      <CCardHeader>
-        Clientes
-      </CCardHeader>
-      <CCardBody>
-        <CRow>
-          <CCol xs="12">
-            <CFormGroup>
-              <CRow>
-                <CCol>
-                  <CLabel htmlFor="titulo">Pesquisar</CLabel>
-                  <CInput id="filtroClienteByNome" 
-                          onChange={(e) => setSearch(e.target.value)}
-                          onKeyPress={(e) => {
-                            if (e.key === "Enter") {
-                              searchClients()
-                            }
-                          }}
-                          placeholder="Nome do cliente" />
-                </CCol>
-                <CCol xl="2" lg="2" sm="2" md="2" >
-                  <CButton block 
-                          color="success" 
-                          className="mb-0" 
-                          style={{ marginTop: '29px' }}
-                          onClick={() => searchClients()}
-                          >Pesquisar</CButton>
-                </CCol>
-                <CCol xl="2" lg="2" sm="2" md="2">
-                  <CButton block 
-                            color="primary" 
-                            className="mb-0" 
-                            style={{ marginTop: '29px' }} 
-                            onClick={() => setModalInsert(!modalInsert)}>Novo</CButton>
-                </CCol>
-              </CRow>
-            </CFormGroup>
-          </CCol>
-        </CRow>
-      </CCardBody>
-
-      <CCard>
+        <CCardHeader>
+          Clientes
+        </CCardHeader>
         <CCardBody>
-          <CDataTable
-            items={clientList}
-            fields={['id', 'nome', 'email', 'curso', 'instituição', 'periodo', 'status', 'ações']}
-            itemsPerPage={5}
-            pagination
-            scopedSlots={{
-              'status':
-                (item) => (
-                  <td>
-                    <CBadge color="primary">
-                      {item.status}
-                    </CBadge>
-                  </td>
-                ),
-              'ações':
-                (item) => (
-                  <td>
-                    <CButton type="submit" 
-                             color="primary" 
-                             onClick={() => {setModal(!modal)
-                             setFormData({
-                               id: item.id,
-                               name: item.nome,
-                               cpf: item.cpf,
-                               email: item.email,
-                               course: item.course,
-                               institution: item.institution,
-                               period: item.period, 
-                               status: item.status 
-                             })
-                             }}><CIcon name="cil-pencil" title="Editar" /></CButton>
-                    <CButton type="reset" color="danger" onClick={() => {
+          <CRow>
+            <CCol xs="12">
+              <CFormGroup>
+                <CRow>
+                  <CCol>
+                    <CLabel htmlFor="titulo">Pesquisar</CLabel>
+                    <CInput id="filtroClienteByNome"
+                            onChange={(e) => setSearch(e.target.value)}
+                            onKeyPress={(e) => {
+                              if (e.key === "Enter") {
+                                searchClients()
+                              }
+                            }}
+                            placeholder="Nome do cliente"/>
+                  </CCol>
+                  <CCol xl="2" lg="2" sm="2" md="2">
+                    <CButton block
+                             color="success"
+                             className="mb-0"
+                             style={{marginTop: '29px'}}
+                             onClick={() => searchClients()}
+                    >Pesquisar</CButton>
+                  </CCol>
+                  <CCol xl="2" lg="2" sm="2" md="2">
+                    <CButton block
+                             color="primary"
+                             className="mb-0"
+                             style={{marginTop: '29px'}}
+                             onClick={() => setModalInsert(!modalInsert)}>Novo</CButton>
+                  </CCol>
+                </CRow>
+              </CFormGroup>
+            </CCol>
+          </CRow>
+        </CCardBody>
+
+        <CCard>
+          <CCardBody>
+            <CDataTable
+              items={clientList}
+              fields={['id', 'nome', 'email', 'curso', 'instituição', 'periodo', 'status', 'ações']}
+              itemsPerPage={5}
+              pagination
+              scopedSlots={{
+                'status':
+                  (item) => (
+                    <td>
+                      <CBadge color="primary">
+                        {item.status}
+                      </CBadge>
+                    </td>
+                  ),
+                'ações':
+                  (item) => (
+                    <td>
+                      <CButton type="submit"
+                               color="primary"
+                               onClick={() => {
+                                 setModal(!modal)
+                                 setFormData({
+                                   id: item.id,
+                                   name: item.nome,
+                                   cpf: item.cpf,
+                                   email: item.email,
+                                   course: item.curso,
+                                   institution: item.instituição,
+                                   period: item.periodo,
+                                   status: item.status
+                                 })
+                               }}><CIcon name="cil-pencil" title="Editar"/></CButton>
+                      <CButton type="reset" color="danger" onClick={() => {
                         setDanger(!danger)
                         setFormData({
-                               id: item.id,
-                               name: item.nome,
-                               cpf: item.cpf,
-                               email: item.email,
-                               course: item.curso,
-                               institution: item.instituição,
-                               period: item.periodo, 
-                               status: item.status 
+                          id: item.id,
+                          name: item.nome,
+                          cpf: item.cpf,
+                          email: item.email,
+                          course: item.curso,
+                          institution: item.instituição,
+                          period: item.periodo,
+                          status: item.status
                         })
-                      }}><CIcon name="cil-trash" title="Excluir" /></CButton>
-                  </td>
-                )
-            }}
-          />
-        </CCardBody>
-      </CCard>
+                      }}><CIcon name="cil-trash" title="Excluir"/></CButton>
+                    </td>
+                  )
+              }}
+            />
+          </CCardBody>
+        </CCard>
       </CCard>
 
       {/*Modal de exclusão*/}
@@ -171,16 +173,16 @@ const Clientes = (props) => {
         </CModalHeader>
         <CModalBody>
           Deseja mesmo excluir o cliente?
-                  </CModalBody>
+        </CModalBody>
         <CModalFooter>
-          <CButton color="danger" 
-          onClick={() => { 
-          Api.deleteClient(formData).then(res => {
-            setClientList(clientList.filter(item => item.id !== formData.id))
-            setDanger(!danger)
-          })
-          
-          }}>Sim</CButton>{' '}
+          <CButton color="danger"
+                   onClick={() => {
+                     Api.deleteClient(formData).then(res => {
+                       setClientList(clientList.filter(item => item.id !== formData.id))
+                       setDanger(!danger)
+                     })
+
+                   }}>Sim</CButton>{' '}
           <CButton color="secondary" onClick={() => setDanger(!danger)}>Não</CButton>
         </CModalFooter>
       </CModal>
@@ -195,13 +197,13 @@ const Clientes = (props) => {
           <CModalTitle>Edição</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          <ModalUpdateCliente />
+          <ModalUpdateCliente/>
         </CModalBody>
         <CModalFooter>
           <CButton color="primary"
-                    onClick={e => {
-                      updateClient();                  
-                    }}
+                   onClick={e => {
+                     updateClient();
+                   }}
           >Salvar</CButton>{' '}
           <CButton
             color="secondary"
@@ -218,7 +220,8 @@ const Clientes = (props) => {
           <CModalTitle>Cadastro</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          <FormCliente />
+          <FormCliente setFormData={setFormData}
+                       formData={formData}/>
         </CModalBody>
         <CModalFooter>
           <CButton color="primary">Salvar</CButton>{' '}
