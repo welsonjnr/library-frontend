@@ -121,4 +121,34 @@ export function deleteClient(client) {
   })
 }
 
+export function deleteLoan(loan) {
+  return new Promise((resolve, reject) => {
+    instance.delete(`/library/loans/${loan.id}`)
+      .then(_ => resolve())
+      .catch(err => reject(err))
+  })
+}
+
+export function listAllLoansToHireSearch(queryParam, content) {
+  return new Promise((resolve, reject) => {
+    instance.get(`/library/loans?${queryParam}=${content}`)
+      .then(({data}) => {
+        if (data.length === 0) resolve([]);
+        const formattedList = data.map(loan =>
+          ({
+            id: loan.id,
+            cliente : loan.client.name,
+            livro : loan.book.name,
+            emprestimo : loan.loanDay,
+            retorno : loan.loanReturnDay,
+            status: loan.loanStatus
+          }));
+        resolve(formattedList);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  })
+};
+
 export default instance;

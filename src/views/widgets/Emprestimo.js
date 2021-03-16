@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import * as Api from "../../common/axios";
 import {
   CRow,
   CCol,
@@ -24,6 +25,47 @@ const Emprestimo = (props) => {
   const [danger, setDanger] = useState(false)
   const [modalInsert, setModalInsert] = useState(false)
 
+  const [loanList, setLoanList] = useState([]);
+  const [search, setSearch] = useState("");
+
+  const [formData, setFormData] = useState(
+    {
+      id: "",
+      loanDay: "",
+      loanReturnDay: "",
+      loanStatus: "",
+      bookName: "",
+      clientName: ""
+    }
+  )
+
+ /* function renewBook() {
+    Api.updateBook(formData).then(res => {
+      searchBooks();
+      setModal(false);
+    });
+  }
+
+  function returnBook() {
+    Api.updateBook(formData).then(res => {
+      searchBooks();
+      setModal(false);
+    });
+  }
+*/
+  function searchLoans() {
+    Api.listAllLoansToHireSearch("name", search)
+      .then(loanList => {
+        setLoanList(loanList.map(loan => ({...loan})))
+      });
+  }
+
+  useEffect(function loadAll() {
+    const mounted = true;
+    if (mounted)
+      searchLoans();
+  }, [])
+
   return (
     <>
       {/*<CCol xs="12" lg="6">*/}
@@ -38,10 +80,21 @@ const Emprestimo = (props) => {
               <CRow>
                 <CCol>
                   <CLabel htmlFor="titulo">Pesquisar</CLabel>
-                  <CInput id="filtroClienteByNome" placeholder="Nome do cliente" />
+                  <CInput id="filtroClienteByNome" 
+                          onChange={(e) => setSearch(e.target.value)}
+                          onKeyPress={(e) => {
+                            if (e.key === "Enter") {
+                              searchLoans()
+                            }
+                          }}
+                          placeholder="Nome do cliente" />
                 </CCol>
                 <CCol xl="2" lg="2" sm="2" md="2">
-                  <CButton block color="success" className="mb-0" style={{ marginTop: '29px' }}>Pesquisar</CButton>
+                  <CButton block color="success" 
+                           className="mb-0" 
+                           style={{ marginTop: '29px' }}
+                           onClick={() => searchLoans()}
+                           >Pesquisar</CButton>
                 </CCol>
                 <CCol xl="2" lg="2" sm="2" md="2">
                   <CButton block color="primary"
@@ -59,12 +112,9 @@ const Emprestimo = (props) => {
       <CCard>
         <CCardBody>
           <CDataTable
-            items={[
-              { ID: 0, cliente: 'Claudio Potter', livro: "Harry Poter", emprestimo: "12/04/2020", retorno: "20/03/2021", status: "Disponível" },
-              { ID: 1, cliente: 'João Potter', livro: "Fique Rico", emprestimo: "30/05/2020", retorno: "06/06/2020", status: "Disponível" }
-            ]}
-            fields={['ID', 'cliente', 'livro', 'emprestimo', 'retorno', 'status', 'ações']}
-            itemsPerPage={5}
+            items={loanList}
+            fields={['id', 'cliente', 'livro', 'emprestimo', 'retorno', 'status', 'ações']}
+            itemsPerPage={15}
             pagination
             scopedSlots={{
               'status':
@@ -80,7 +130,16 @@ const Emprestimo = (props) => {
                   <td>
                     <CButton type="submit" color="primary"><CIcon name="cil-arrow-circle-bottom" title="Retornar" /></CButton>
                     <CButton type="submit" color="dark"><CIcon name="cil-reload" title="Renovar" /></CButton>
-                    <CButton type="reset" color="danger"><CIcon name="cil-trash" title="Excluir" onClick={() => setDanger(!danger)} /></CButton>
+                    <CButton type="reset" color="danger"><CIcon name="cil-trash" title="Excluir" onClick={() => {
+                      setDanger(!danger)
+                      setFormData({
+                        id: item.id,
+                        loanDay: item.emprestimo,
+                        loanReturnDay: item.retorno,
+                        clientId: item.cliente.id,
+                        bookId: item.book.id 
+                      })
+                    }}/></CButton>
                   </td>
                 )
             }}
@@ -100,7 +159,12 @@ const Emprestimo = (props) => {
           Deseja mesmo excluir o empréstimo?
               </CModalBody>
         <CModalFooter>
-          <CButton color="danger" onClick={() => setDanger(!danger)}>Sim</CButton>{' '}
+          <CButton color="danger" onClick={() => {
+            Api.deleteLoan(formData).then(res => {
+              setLoanList(loanList.filter(item => item.id !== formData.id))
+              setDanger(!danger)
+            })
+          }}>Sim</CButton>{' '}
           <CButton color="secondary" onClick={() => setDanger(!danger)}>Não</CButton>
         </CModalFooter>
       </CModal>
