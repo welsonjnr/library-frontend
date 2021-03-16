@@ -133,11 +133,7 @@ const Emprestimo = (props) => {
                     <CButton type="reset" color="danger"><CIcon name="cil-trash" title="Excluir" onClick={() => {
                       setDanger(!danger)
                       setFormData({
-                        id: item.id,
-                        loanDay: item.emprestimo,
-                        loanReturnDay: item.retorno,
-                        clientId: item.cliente.id,
-                        bookId: item.book.id 
+                        id: item.id
                       })
                     }}/></CButton>
                   </td>
