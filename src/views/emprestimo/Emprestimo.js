@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import * as Api from "../../common/axios";
 import {
     CButton,
     CCard,
@@ -41,8 +42,26 @@ import {
 import CIcon from '@coreui/icons-react'
 import { DocsLink } from 'src/reusable'
 const Emprestimo = () => {
-    const [collapsed, setCollapsed] = React.useState(true)
-    const [showElements, setShowElements] = React.useState(true)
+
+  const [bookList, setBookList] = useState([]);
+  const [searchBook, setSearchBook] = useState("");
+
+  const [clientList, setClientList] = useState([]);
+  const [searchClient, setSearchClient] = useState("");
+
+    function searchBooks() {
+    Api.listAllBooksToHireSearch("name", searchBook)
+      .then(bookList => {
+        setBookList(bookList.map(book => ({...book})))
+      });
+    }
+
+    function searchClients() {
+      Api.listAllClientsToHireSearch("name", searchClient)
+        .then(clientList => {
+          setClientList(clientList.map(client => ({...client})))
+        });
+    }
 
     const [success, setSuccess] = useState(false)
     const [info, setInfo] = useState(false)
@@ -62,11 +81,22 @@ const Emprestimo = () => {
                                     <CFormGroup row>
                                         <CCol xs="11">
                                             <CLabel htmlFor="nomelivro">Título</CLabel>
-                                            <CInput id="nomeLivroEmprestimo" placeholder="Insira o título do livro" />
+                                            <CInput id="nomeLivroEmprestimo" 
+                                            placeholder="Insira o título do livro"
+                                            onChange={(e) => setSearchBook(e.target.value)}
+                                            onKeyPress={(e) => {
+                                            if (e.key === "Enter") {
+                                            setSuccess(!success)
+                                            searchBooks()}
+                                            }}
+                                            />
                                         </CCol>
                                         <CCol xs="1">
-                                            <CButton onClick={() => setSuccess(!success)} type="reset" color="success" style={{marginTop: '27px'}}>
-                                                <CIcon name="cil-search" title="Pesquisar" /></CButton>
+                                            <CButton onClick={() => {
+                                              searchBooks()
+                                              setSuccess(!success)}}
+                                              type="reset" color="success" style={{marginTop: '27px'}}>
+                                              <CIcon name="cil-search" title="Pesquisar" /></CButton>
                                         </CCol>
                                     </CFormGroup>
                                     <CFormGroup>
@@ -101,7 +131,14 @@ const Emprestimo = () => {
                                     <CFormGroup row>
                                         <CCol xs="11">
                                             <CLabel htmlFor="nomeCliente">Nome</CLabel>
-                                            <CInput id="cpfClienteEmprestimo" placeholder="Insira o nome do cliente" />
+                                            <CInput id="cpfClienteEmprestimo"
+                                            placeholder="Insira o nome do cliente"
+                                            onChange={(e) => setSearchClient(e.target.value)}
+                                            onKeyPress={(e) => {
+                                            if (e.key === "Enter") {
+                                            setInfo(!info)
+                                            searchClients()} }}
+                                            />
                                         </CCol>
                                         <CCol xs="1">
                                             <CButton onClick={() => setInfo(!info)} type="reset" color="success" style={{marginTop: '27px'}}>
@@ -150,11 +187,8 @@ const Emprestimo = () => {
         <CCard>
         <CCardBody>
           <CDataTable
-            items={[
-              { ID: 0, título: 'Claudio Potter', autor: "a@gmail.com",  status: "Adimnistração", quantidade: 2 },
-              { ID: 1, título: 'João Potter', autor: "j@gmail.com",  status: "Análise", quantidade: 3 }
-            ]}
-            fields={['ID', 'título', 'autor', 'status', 'quantidade', 'ações']}
+            items={bookList}
+            fields={['título', 'autor', 'status', 'quantidade', 'ações']}
             itemsPerPage={5}
             pagination
             scopedSlots={{
@@ -202,11 +236,8 @@ const Emprestimo = () => {
         <CCard>
         <CCardBody>
           <CDataTable
-            items={[
-              { ID: 0, nome: 'Claudio Potter', email: "a@gmail.com", cpf:"12345678920", status: "Disponível" },
-              { ID: 1, nome: 'João Potter', email: "j@gmail.com", cpf:"12345678920", status: "Esgotado" }
-            ]}
-            fields={['ID', 'nome', 'email', 'cpf', 'status', 'ações']}
+            items={clientList}
+            fields={['nome', 'email', 'cpf', 'status', 'ações']}
             itemsPerPage={5}
             pagination
             scopedSlots={{

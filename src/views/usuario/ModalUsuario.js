@@ -32,11 +32,11 @@ const ModalUsuario = (props) => {
               </CFormGroup>
               <CFormGroup>
                 <CLabel htmlFor="senhaUsuario">Senha</CLabel>
-                <CInput id="senhaUsuario" placeholder="Insira a senha" />
+                <CInput id="senhaUsuario" placeholder="Insira a senha" type="password"/>
               </CFormGroup>
               <CFormGroup>
                 <CLabel htmlFor="senhaUsuario2">Digite novamente a senha</CLabel>
-                <CInput id="senhaUsuario2" placeholder="Insira a senha novamente"/>
+                <CInput id="senhaUsuario2" placeholder="Insira a senha novamente" type="password"/>
               </CFormGroup>
             </CCardBody>
           </CCard>
