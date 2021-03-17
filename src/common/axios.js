@@ -103,6 +103,14 @@ export function listAllClientsToHireSearch(queryParam, content) {
   })
 };
 
+export function insertClient(client) {
+  return new Promise((resolve, reject) => {
+    instance.post('/library/clients', client)
+      .then(_ => resolve())
+      .catch(e => reject(e))
+  })
+}
+
 export function updateClient(client) {
   return new Promise((resolve, reject) => {
     instance.put(`/library/clients/${client.id}`, { ...client })
@@ -128,6 +136,16 @@ export function deleteLoan(loan) {
       .catch(err => reject(err))
   })
 }
+
+export function renewLoan(loan) {
+  return new Promise((resolve, reject) => {
+    instance.put(`/library/loans/renew/${loan.id}`, { ...loan })
+      .then( _ => { resolve(); })
+      .catch(err => {
+        reject(err);
+      });
+  })
+};
 
 export function listAllLoansToHireSearch(queryParam, content) {
   return new Promise((resolve, reject) => {

@@ -121,7 +121,7 @@ const Livro = (props) => {
         <CCardBody>
           <CDataTable
             items={bookList}
-            fields={['id', 'título', 'autor', 'edição', 'status', 'quantidade', 'categoria', 'ações']}
+            fields={['título', 'autor', 'edição', 'status', 'quantidade', 'categoria', 'ações']}
             itemsPerPage={15}
             pagination
             scopedSlots={{

@@ -79,7 +79,7 @@ const HireBooks = (props) => {
           <CDataTable
             items={bookList}
             fields={['título', 'edição', 'autor', 'status', 'quantidade', 'alugar']}
-            itemsPerPage={5}
+            itemsPerPage={15}
             pagination
             scopedSlots={{
               status:
