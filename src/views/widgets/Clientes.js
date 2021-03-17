@@ -20,7 +20,6 @@ import CIcon from "@coreui/icons-react";
 import * as Api from "../../common/axios";
 import ModalUpdateCliente from '../cliente/ModalUpdateCliente'
 import FormCliente from '../cliente/FormCliente';
-import ModalUpdateLivro from "../livro/ModalUpdateLivro";
 
 const Clientes = (props) => {
 
@@ -41,10 +40,19 @@ const Clientes = (props) => {
     period: ""
   })
 
+  const [formDataUpdate, setFormDataUpdate] = useState({
+    id: "",
+    name: "",
+    email: "",
+    course: "",
+    institution: "",
+    period: ""
+  })
+
   useEffect(() => console.log(formData), [formData])
 
   function updateClient() {
-    Api.updateClient(formData).then(res => {
+    Api.updateClient(formDataUpdate).then(res => {
       searchClients();
       setModal(false);
     });
@@ -99,7 +107,19 @@ const Clientes = (props) => {
                              color="primary"
                              className="mb-0"
                              style={{marginTop: '29px'}}
-                             onClick={() => setModalInsert(!modalInsert)}>Novo</CButton>
+                             onClick={() => {
+                               setFormData({
+                                 id: null, 
+                                 name: "",
+                                 cpf: "",
+                                 email: "",
+                                 course: "",
+                                 institution: "",
+                                 period: ""
+                                 })
+                                 setModalInsert(!modalInsert)
+                               }}
+                      >Novo</CButton>
                   </CCol>
                 </CRow>
               </CFormGroup>
@@ -111,8 +131,8 @@ const Clientes = (props) => {
           <CCardBody>
             <CDataTable
               items={clientList}
-              fields={['id', 'nome', 'email', 'curso', 'instituição', 'periodo', 'status', 'ações']}
-              itemsPerPage={5}
+              fields={['nome', 'email', 'curso', 'instituição', 'periodo', 'status', 'ações']}
+              itemsPerPage={15}
               pagination
               scopedSlots={{
                 'status':
@@ -130,10 +150,9 @@ const Clientes = (props) => {
                                color="primary"
                                onClick={() => {
                                  setModal(!modal)
-                                 setFormData({
+                                 setFormDataUpdate({
                                    id: item.id,
                                    name: item.nome,
-                                   cpf: item.cpf,
                                    email: item.email,
                                    course: item.curso,
                                    institution: item.instituição,
@@ -197,7 +216,10 @@ const Clientes = (props) => {
           <CModalTitle>Edição</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          <ModalUpdateCliente/>
+          <ModalUpdateCliente
+            setFormDataUpdate={setFormDataUpdate}
+            formDataUpdate={formDataUpdate}
+          />
         </CModalBody>
         <CModalFooter>
           <CButton color="primary"
@@ -220,11 +242,19 @@ const Clientes = (props) => {
           <CModalTitle>Cadastro</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          <FormCliente setFormData={setFormData}
-                       formData={formData}/>
+          <FormCliente 
+          setFormData={setFormData}
+          formData={formData}/>
         </CModalBody>
         <CModalFooter>
-          <CButton color="primary">Salvar</CButton>{' '}
+          <CButton color="primary"
+          onClick={() => {
+            Api.insertClient(formData).then(_ => {
+              searchClients()
+              setModalInsert(!modalInsert)
+            })
+          }}
+          >Salvar</CButton>{' '}
           <CButton
             color="secondary"
             onClick={() => setModalInsert(false)}

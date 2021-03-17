@@ -39,22 +39,22 @@ const Emprestimo = (props) => {
     }
   )
 
- /* function renewBook() {
-    Api.updateBook(formData).then(res => {
-      searchBooks();
-      setModal(false);
+  function renewLoan() {
+    Api.renewLoan(formData).then(res => {
+      searchLoans();
     });
   }
 
-  function returnBook() {
+/*  function returnBook() {
     Api.updateBook(formData).then(res => {
       searchBooks();
       setModal(false);
     });
   }
 */
+
   function searchLoans() {
-    Api.listAllLoansToHireSearch("name", search)
+    Api.listAllLoansToHireSearch("nameclient", search)
       .then(loanList => {
         setLoanList(loanList.map(loan => ({...loan})))
       });
@@ -113,7 +113,7 @@ const Emprestimo = (props) => {
         <CCardBody>
           <CDataTable
             items={loanList}
-            fields={['id', 'cliente', 'livro', 'emprestimo', 'retorno', 'status', 'ações']}
+            fields={['cliente', 'livro', 'emprestimo', 'retorno', 'status', 'ações']}
             itemsPerPage={15}
             pagination
             scopedSlots={{
@@ -129,7 +129,16 @@ const Emprestimo = (props) => {
                 (item) => (
                   <td>
                     <CButton type="submit" color="primary"><CIcon name="cil-arrow-circle-bottom" title="Retornar" /></CButton>
-                    <CButton type="submit" color="dark"><CIcon name="cil-reload" title="Renovar" /></CButton>
+                    <CButton type="submit"
+                    color="dark"
+                    onClick={() => {
+                      setFormData({
+                        id: item.id,
+                        bookId: item.livro.id,
+                        clientId: item.cliente.id
+                      })
+                    }}
+                    ><CIcon name="cil-reload" title="Renovar" /></CButton>
                     <CButton type="reset" color="danger"><CIcon name="cil-trash" title="Excluir" onClick={() => {
                       setDanger(!danger)
                       setFormData({

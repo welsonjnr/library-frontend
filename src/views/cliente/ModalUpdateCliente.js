@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import InputMask from "react-input-mask";
 import {
   CButton,
@@ -32,12 +32,8 @@ import {
   CRow,
   CSwitch
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { DocsLink } from 'src/reusable'
 
-const ModalFormLivro = (props) => {
-  const [collapsed, setCollapsed] = React.useState(true)
-  const [showElements, setShowElements] = React.useState(true)
+const ModalFormCliente = (props) => {
 
   return (
     <>
@@ -50,27 +46,44 @@ const ModalFormLivro = (props) => {
             <CCardBody>
               <CFormGroup>
                 <CLabel htmlFor="nome">Nome</CLabel>
-                <CInput id="nomeCliente" placeholder="Insira o nome do cliente" />
-              </CFormGroup>
-              <CFormGroup>
-                <CLabel htmlFor="cpf">CPF</CLabel>
-                <CInput id="cpfCliente" placeholder="Insira o cpf do cliente" maxlength="11"/>
+                <CInput id="nomeCliente" 
+                placeholder="Insira o nome do cliente" 
+                value={props.formDataUpdate.name}
+                onChange={e => props.setFormDataUpdate({ ...props.formDataUpdate, name: e.target.value })}
+                />
               </CFormGroup>
               <CFormGroup>
                 <CLabel htmlFor="email">Email</CLabel>
-                <CInput id="emailCliente" placeholder="Insira o email do cliente" />
+                <CInput id="emailCliente" 
+                placeholder="Insira o email do cliente" 
+                value={props.formDataUpdate.email}
+                onChange={e => props.setFormDataUpdate({ ...props.formDataUpdate, email: e.target.value })}
+                />
               </CFormGroup>
               <CFormGroup>
                 <CLabel htmlFor="curso">Curso</CLabel>
-                <CInput id="cursoCliente" placeholder="Insira o curso do cliente" />
+                <CInput id="cursoCliente" 
+                placeholder="Insira o curso do cliente" 
+                value={props.formDataUpdate.course}
+                onChange={e => props.setFormDataUpdate({ ...props.formDataUpdate, course: e.target.value })}
+                />
               </CFormGroup>
               <CFormGroup>
                 <CLabel htmlFor="institution">Instituição</CLabel>
-                <CInput id="institutionCliente" placeholder="Insira a instituição do cliente" />
+                <CInput id="institutionCliente" 
+                placeholder="Insira a instituição do cliente" 
+                value={props.formDataUpdate.institution}
+                onChange={e => props.setFormDataUpdate({ ...props.formDataUpdate, institution: e.target.value })}
+                />
               </CFormGroup>
               <CFormGroup>
                 <CLabel htmlFor="periodo">Período</CLabel>
-                <CInput id="periodoCliente" type="number" min="0" max="16" placeholder="Insira o período do cliente" />
+                <CInput id="periodoCliente" 
+                type="number" min="0" max="16" 
+                placeholder="Insira o período do cliente" 
+                value={props.formDataUpdate.period}
+                onChange={e => props.setFormDataUpdate({ ...props.formDataUpdate, period: e.target.value })}
+                />
               </CFormGroup>
             </CCardBody>
           </CCard>
@@ -80,4 +93,4 @@ const ModalFormLivro = (props) => {
   )
 }
 
-export default ModalFormLivro
+export default ModalFormCliente
