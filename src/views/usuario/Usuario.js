@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import * as Api from "../../common/axios";
 import {
   CBadge,
   CCard,
@@ -23,10 +24,17 @@ import ModalUsuario from './ModalUsuario'
 
 
 const Usuario = () => {
-  const [collapsed, setCollapsed] = React.useState(true)
-  const [showCard, setShowCard] = React.useState(true)
 
   const [modalInsert, setModalInsert] = useState(false)
+
+  const [formData, setFormData] = useState(
+    {
+      id: "",
+      name: "",
+      email: "",
+      senha: ""
+    }
+  )
 
   return (
     <>
@@ -51,8 +59,17 @@ const Usuario = () => {
           </CCard>
         </CCol>
       </CRow>
-      <CButton color="primary" onClick={() => setModalInsert(!false)}>Novo usuário</CButton>{' '}
-
+      <CButton color="primary" 
+        onClick={() => {
+        setFormData({
+          id: null,
+          name: "",
+          email: "",
+          senha: ""
+        })
+        setModalInsert(!modalInsert)
+      }}
+      >Novo usuário</CButton>{' '}
       <CModal
         show={modalInsert}
         onClose={setModalInsert}
@@ -64,7 +81,13 @@ const Usuario = () => {
           <ModalUsuario />
         </CModalBody>
         <CModalFooter>
-          <CButton color="primary">Salvar</CButton>{' '}
+          <CButton color="primary"
+          onClick={() => {
+            Api.insertUsuario(formData).then(_ => {
+              setModalInsert(!modalInsert)
+            })
+          }}
+          >Salvar</CButton>{' '}
           <CButton
             color="secondary"
             onClick={() => setModalInsert(false)}

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import ModalUpdateLivro from "../livro/ModalUpdateLivro"
+import * as Api from "../../common/axios";
 import {
   CRow,
   CCol,
@@ -19,7 +20,6 @@ import {
 } from "@coreui/react";
 
 import CIcon from "@coreui/icons-react";
-import * as Api from "../../common/axios";
 import FormLivro from '../livro/FormLivro';
 /*Comentário para salvar o commit*/
 const Livro = (props) => {

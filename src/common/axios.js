@@ -169,4 +169,12 @@ export function listAllLoansToHireSearch(queryParam, content) {
   })
 };
 
+export function insertUsuario(usuario) {
+  return new Promise((resolve, reject) => {
+    instance.post('/library/user', usuario)
+      .then(_ => resolve())
+      .catch(e => reject(e))
+  })
+}
+
 export default instance;
