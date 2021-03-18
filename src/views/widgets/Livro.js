@@ -4,7 +4,6 @@ import * as Api from "../../common/axios";
 import {
   CRow,
   CCol,
-  CWidgetBrand,
   CCard,
   CCardHeader,
   CCardBody,
@@ -20,7 +19,6 @@ import {
 } from "@coreui/react";
 
 import CIcon from "@coreui/icons-react";
-import FormLivro from '../livro/FormLivro';
 /*Comentário para salvar o commit*/
 const Livro = (props) => {
 

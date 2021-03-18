@@ -1,4 +1,3 @@
-import React from 'react';
 import HireBooks from "./views/widgets/HireBooks";
 import Clientes from "./views/widgets/Clientes";
 import Livro from "./views/widgets/Livro";

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {
   CCard,
   CCardBody,
@@ -7,7 +7,6 @@ import {
   CFormGroup,
   CInput,
   CLabel,
-  CSelect,
   CRow
 } from '@coreui/react'
 

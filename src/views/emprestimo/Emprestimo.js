@@ -4,31 +4,12 @@ import {
     CButton,
     CCard,
     CCardBody,
-    CCardFooter,
     CCardHeader,
     CCol,
-    CCollapse,
-    CDropdownItem,
-    CDropdownMenu,
-    CDropdownToggle,
-    CFade,
-    CForm,
     CFormGroup,
-    CFormText,
-    CValidFeedback,
-    CInvalidFeedback,
-    CTextarea,
     CInput,
-    CInputFile,
     CInputCheckbox,
-    CInputRadio,
-    CInputGroup,
-    CInputGroupAppend,
-    CInputGroupPrepend,
-    CDropdown,
-    CInputGroupText,
     CLabel,
-    CSelect,
     CRow,
     CModal,
     CModalBody,
@@ -36,11 +17,9 @@ import {
     CModalHeader,
     CBadge,
     CModalTitle,
-    CDataTable,
-    CSwitch
+    CDataTable
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { DocsLink } from 'src/reusable'
 const Emprestimo = () => {
 
   const [bookList, setBookList] = useState([]);
@@ -136,13 +115,14 @@ const Emprestimo = () => {
                                             onChange={(e) => setSearchClient(e.target.value)}
                                             onKeyPress={(e) => {
                                             if (e.key === "Enter") {
+                                            searchClients()
                                             setInfo(!info)
-                                            searchClients()} }}
+                                          } }}
                                             />
                                         </CCol>
                                         <CCol xs="1">
                                             <CButton onClick={() => setInfo(!info)} type="reset" color="success" style={{marginTop: '27px'}}>
-                                                <CIcon name="cil-search" title="Pesquisar"/></CButton>
+                                                <CIcon name="cil-search" onClick={() => searchClients()} title="Pesquisar"/></CButton>
                                         </CCol>
                                     </CFormGroup>
                                     <CFormGroup>
@@ -188,7 +168,7 @@ const Emprestimo = () => {
         <CCardBody>
           <CDataTable
             items={bookList}
-            fields={['título', 'autor', 'status', 'quantidade', 'ações']}
+            fields={['ações', 'título', 'autor', 'status', 'quantidade']}
             itemsPerPage={5}
             pagination
             scopedSlots={{
@@ -203,7 +183,7 @@ const Emprestimo = () => {
               'ações':
                 (item) => (
                   <td>
-                      <CSwitch className={'mx-1'} variant={'3d'} color={'success'} labelOn={'\u2713'} labelOff={'\u2715'}/>
+                      <CInputCheckbox value={item.id} style={{marginLeft: '10px'}}/>
                   </td>
                 )
             }}
@@ -237,7 +217,7 @@ const Emprestimo = () => {
         <CCardBody>
           <CDataTable
             items={clientList}
-            fields={['nome', 'email', 'cpf', 'status', 'ações']}
+            fields={['ações', 'nome', 'email', 'cpf', 'status']}
             itemsPerPage={5}
             pagination
             scopedSlots={{
@@ -252,7 +232,7 @@ const Emprestimo = () => {
               'ações':
                 (item) => (
                   <td>
-                    <CSwitch className={'mx-1'} variant={'3d'} color={'info'} labelOn={'\u2713'} labelOff={'\u2715'}/>
+                    <CInputCheckbox value={item.id} style={{marginLeft: '10px'}}/>
                   </td>
                 )
             }}
