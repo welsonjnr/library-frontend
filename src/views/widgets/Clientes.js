@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {
   CRow,
   CCol,
-  CWidgetBrand,
   CCard,
   CCardHeader,
   CCardBody,

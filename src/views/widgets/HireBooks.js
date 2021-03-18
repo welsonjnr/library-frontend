@@ -4,7 +4,6 @@ import ModalEmprestimo from "../emprestimo/Emprestimo"
 import {
   CRow,
   CCol,
-  CWidgetBrand,
   CCard,
   CCardHeader,
   CCardBody,

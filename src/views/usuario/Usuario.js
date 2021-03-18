@@ -1,17 +1,11 @@
 import React, {useState} from 'react'
 import * as Api from "../../common/axios";
 import {
-  CBadge,
   CCard,
   CCardBody,
-  CCardFooter,
   CCardHeader,
   CCol,
   CRow,
-  CCollapse,
-  CFade,
-  CSwitch,
-  CLink,  
   CButton, 
   CModalFooter,
   CModal,
@@ -19,7 +13,6 @@ import {
   CModalHeader,
   CModalTitle,
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
 import ModalUsuario from './ModalUsuario'
 
 

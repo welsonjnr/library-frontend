@@ -1,36 +1,13 @@
 import React from 'react'
-import InputMask from "react-input-mask";
 import {
-  CButton,
   CCard,
   CCardBody,
-  CCardFooter,
   CCardHeader,
   CCol,
-  CCollapse,
-  CDropdownItem,
-  CDropdownMenu,
-  CDropdownToggle,
-  CFade,
-  CForm,
   CFormGroup,
-  CFormText,
-  CValidFeedback,
-  CInvalidFeedback,
-  CTextarea,
   CInput,
-  CInputFile,
-  CInputCheckbox,
-  CInputRadio,
-  CInputGroup,
-  CInputGroupAppend,
-  CInputGroupPrepend,
-  CDropdown,
-  CInputGroupText,
   CLabel,
-  CSelect,
-  CRow,
-  CSwitch
+  CRow
 } from '@coreui/react'
 
 const ModalFormCliente = (props) => {
