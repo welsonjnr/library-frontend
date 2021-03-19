@@ -55,11 +55,8 @@ const Emprestimo = (props) => {
   const [formDataLoan, setFormDataLoan] = useState(
     {
       id: "",
-      loanDay: "",
-      loanReturnDay: "",
-      loanStatus: "",
-      bookName: "",
-      clientName: ""
+      bookId: "",
+      clientId: ""
     }
   )
 

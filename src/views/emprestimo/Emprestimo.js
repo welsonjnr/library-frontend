@@ -48,6 +48,12 @@ const Emprestimo = (props) => {
   const [success, setSuccess] = useState(false)
   const [info, setInfo] = useState(false)
 
+  const [formDataLoanDTO, setFormDataLoanDTO] = useState({
+    id:"",
+    bookId: "",
+    clientId: ""
+  })
+
   const [formData, setFormData] = useState({
     cliente: {
       cpf: "",
@@ -279,7 +285,9 @@ const Emprestimo = (props) => {
         <CModalFooter>
           <CButton
             color="success"
-            onClick={() => setSuccess(false)}
+            onClick={() => {
+              setSuccess(false)}
+            }
           >OK</CButton>
         </CModalFooter>
       </CModal>
@@ -331,7 +339,10 @@ const Emprestimo = (props) => {
         <CModalFooter>
           <CButton
             color="info"
-            onClick={() => setInfo(false)}
+            onClick={() => {
+              props.setFormDataLoan({id:null, bookId: formData.livro.id, clientId: formData.cliente.id})
+              setInfo(false)}
+            }
           >OK</CButton>
         </CModalFooter>
       </CModal>
