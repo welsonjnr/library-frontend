@@ -21,7 +21,9 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
-const Emprestimo = () => {
+const Emprestimo = (props) => {
+
+
 
   function searchBooks() {
     Api.listAllBooksToHireSearch("name", searchBook)
@@ -70,7 +72,11 @@ const Emprestimo = () => {
 
   useEffect(() => {
     console.log(formData)
-  }, [formData])
+  },[formData])
+
+  useEffect(() => {
+    setFormData({ ...formData, livro: props.formData })
+  }, [props.formData])
 
 
   return (
