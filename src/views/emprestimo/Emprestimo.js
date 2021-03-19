@@ -116,13 +116,16 @@ const Emprestimo = () => {
                                             onKeyPress={(e) => {
                                             if (e.key === "Enter") {
                                             searchClients()
-                                            setInfo(!info)
-                                          } }}
+                                            setInfo(!info)}
+                                          }}
                                             />
                                         </CCol>
                                         <CCol xs="1">
-                                            <CButton onClick={() => setInfo(!info)} type="reset" color="success" style={{marginTop: '27px'}}>
-                                                <CIcon name="cil-search" onClick={() => searchClients()} title="Pesquisar"/></CButton>
+                                            <CButton onClick={() => {
+                                              searchClients()
+                                              setInfo(!info)}} 
+                                              type="reset" color="success" style={{marginTop: '27px'}}>
+                                              <CIcon name="cil-search" onClick={() => setInfo(!info)} title="Pesquisar"/></CButton>
                                         </CCol>
                                     </CFormGroup>
                                     <CFormGroup>

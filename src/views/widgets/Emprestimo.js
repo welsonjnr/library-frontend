@@ -24,6 +24,10 @@ const Emprestimo = (props) => {
 
   const [danger, setDanger] = useState(false)
   const [modalInsert, setModalInsert] = useState(false)
+  const [modalRenew, setModalRenew] = useState(false)
+  const [modalReturn, setModalReturn] = useState(false)
+
+  const [returnDesabled, setReturnDesabled] = useState(false)
 
   const [loanList, setLoanList] = useState([]);
   const [search, setSearch] = useState("");
@@ -39,19 +43,34 @@ const Emprestimo = (props) => {
     }
   )
 
+  const [formDataRenew, setFormDataRenew] = useState(
+    {
+      id: "",
+      bookId: "",
+      clientId: ""
+    }
+  )
+
+  const [formDataReturn, setFormDataReturn] = useState(
+    {
+      id: "",
+      bookId: "",
+      clientId: ""
+    }
+  )
+
   function renewLoan() {
-    Api.renewLoan(formData).then(res => {
+    Api.renewLoan(formDataRenew).then(res => {
       searchLoans();
     });
   }
 
-/*  function returnBook() {
-    Api.updateBook(formData).then(res => {
-      searchBooks();
-      setModal(false);
+  function returnLoan() {
+    Api.returnLoan(formDataReturn).then(res => {
+      searchLoans();
     });
   }
-*/
+
 
   function searchLoans() {
     Api.listAllLoansToHireSearch("nameclient", search)
@@ -128,17 +147,33 @@ const Emprestimo = (props) => {
               'ações':
                 (item) => (
                   <td>
-                    <CButton type="submit" color="primary"><CIcon name="cil-arrow-circle-bottom" title="Retornar" /></CButton>
+                    
+                    <CButton type="submit" 
+                    disabled={item.status === 'DEVOLVIDO' || item.status === 'RENOVADO'}
+                    color="primary"
+                    onClick={() => {
+                      setModalReturn(!modalReturn)
+                      setFormDataReturn({
+                        id: item.id,
+                        bookId: item.idBook,
+                        clientId: item.idClient
+                      })
+                    }
+                  }
+                  ><CIcon name="cil-arrow-circle-bottom" title="Retornar"/></CButton>
                     <CButton type="submit"
+                    disabled={item.status === 'DEVOLVIDO' || item.status === 'RENOVADO'}
                     color="dark"
                     onClick={() => {
-                      setFormData({
+                      setModalRenew(!modalRenew)
+                      setFormDataRenew({
                         id: item.id,
-                        bookId: item.livro.id,
-                        clientId: item.cliente.id
+                        bookId: item.idBook,
+                        clientId: item.idClient
                       })
-                    }}
-                    ><CIcon name="cil-reload" title="Renovar" /></CButton>
+                    }
+                  }
+                    ><CIcon name="cil-reload" title="Renovar"/></CButton>
                     <CButton type="reset" color="danger"><CIcon name="cil-trash" title="Excluir" onClick={() => {
                       setDanger(!danger)
                       setFormData({
@@ -173,6 +208,7 @@ const Emprestimo = (props) => {
           <CButton color="secondary" onClick={() => setDanger(!danger)}>Não</CButton>
         </CModalFooter>
       </CModal>
+
       <CModal
         show={modalInsert}
         onClose={setModalInsert}
@@ -192,6 +228,51 @@ const Emprestimo = (props) => {
           >Cancelar</CButton>
         </CModalFooter>
       </CModal>
+
+      <CModal
+        show={modalRenew}
+        onClose={() => setModalRenew(!modalRenew)}
+      >
+        <CModalHeader closeButton>
+          <CModalTitle>Confirmação</CModalTitle>
+        </CModalHeader>
+        <CModalBody>
+          Deseja mesmo renovar o empréstimo?
+              </CModalBody>
+        <CModalFooter>
+          <CButton color="primary" onClick={() => {
+            Api.renewLoan(formDataRenew).then(res => {
+              setLoanList(loanList.filter(item => item.id !== formDataRenew.id))
+              searchLoans();
+              setModalRenew(!modalRenew)
+            })
+          }}>Sim</CButton>{' '}
+          <CButton color="secondary" onClick={() => setModalRenew(!modalRenew)}>Não</CButton>
+        </CModalFooter>
+      </CModal>
+
+      <CModal
+        show={modalReturn}
+        onClose={() => setModalReturn(!modalReturn)}
+      >
+        <CModalHeader closeButton>
+          <CModalTitle>Confirmação</CModalTitle>
+        </CModalHeader>
+        <CModalBody>
+          Deseja mesmo retornar o empréstimo?
+              </CModalBody>
+        <CModalFooter>
+          <CButton color="primary" onClick={() => {
+            Api.returnLoan(formDataReturn).then(res => {
+              setLoanList(loanList.filter(item => item.id !== formDataReturn.id))
+              searchLoans();
+              setModalReturn(!modalReturn)
+            })
+          }}>Sim</CButton>{' '}
+          <CButton color="secondary" onClick={() => setModalReturn(!modalReturn)}>Não</CButton>
+        </CModalFooter>
+      </CModal>
+
       {/*</CCol>*/}
       </CCard>
     </>

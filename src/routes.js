@@ -13,9 +13,6 @@ const routes = [
   { path: '/clientes', name: 'Clientes', component: Clientes },
   { path: '/livros', name: 'Livros', component: Livro },
   { path: '/emprestimos', name: 'Emprestimos', component: Emprestimo },
-  { path: '/cadastro-livro', name: 'Novo Livro', component: FormLivro },
-  { path: '/cadastro-cliente', name: 'Novo Cliente', component: FormCliente },
-  { path: '/cadastro-emprestimo', name: 'Emprestimos', component: FormEmprestimo },
   { path: '/minha-conta', name: 'Minha Conta', component: Usuario },
 ];
 
