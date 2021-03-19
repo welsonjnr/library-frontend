@@ -147,6 +147,16 @@ export function renewLoan(loan) {
   })
 };
 
+export function returnLoan(loan) {
+  return new Promise((resolve, reject) => {
+    instance.put(`/library/loans/return/${loan.id}`, { ...loan })
+      .then( _ => { resolve(); })
+      .catch(err => {
+        reject(err);
+      });
+  })
+};
+
 export function listAllLoansToHireSearch(queryParam, content) {
   return new Promise((resolve, reject) => {
     instance.get(`/library/loans?${queryParam}=${content}`)
@@ -159,7 +169,9 @@ export function listAllLoansToHireSearch(queryParam, content) {
             livro : loan.book.name,
             emprestimo : loan.loanDay,
             retorno : loan.loanReturnDay,
-            status: loan.loanStatus
+            status: loan.loanStatus,
+            idClient: loan.client.id,
+            idBook: loan.book.id
           }));
         resolve(formattedList);
       })
