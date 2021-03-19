@@ -174,7 +174,7 @@ const Emprestimo = (props) => {
                   <td>
                     
                     <CButton type="submit" 
-                    disabled={item.status === 'DEVOLVIDO' || item.status === 'RENOVADO'}
+                    disabled={item.status === 'DEVOLVIDO'}
                     color="primary"
                     onClick={() => {
                       setModalReturn(!modalReturn)
