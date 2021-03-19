@@ -81,6 +81,9 @@ const Emprestimo = (props) => {
   },[formData])
 
     useEffect(() => {
+      if(props.formData == null){
+        return null
+      }
       setFormData({ ...formData, livro: props.formData })
     }, [props.formData])
   

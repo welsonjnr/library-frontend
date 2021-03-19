@@ -246,7 +246,14 @@ const Emprestimo = (props) => {
           <ModalEmprestimo formDataLoan={formDataLoan} setFormDataLoan={setFormDataLoan}/>
         </CModalBody>
         <CModalFooter>
-          <CButton color="primary">Salvar</CButton>{' '}
+          <CButton color="primary"
+          onClick={() => {
+            Api.insertLoan(formDataLoan).then(_=> {
+              setModalInsert(!modalInsert)
+              searchLoans()
+            })
+          }}
+          >Salvar</CButton>{' '}
           <CButton
             color="secondary"
             onClick={() => setModalInsert(false)}
