@@ -115,6 +115,11 @@ const HireBooks = (props) => {
                            color="primary"
                            onClick={() => {
                              setFormData(item)
+                             setFormDataLoan({
+                               id: null,
+                               bookId: "",
+                               clientId: ""
+                             })
                              setModalInsert(!modalInsert)
                            }}
                            size="sm">Alugar</CButton>
@@ -146,7 +151,9 @@ const HireBooks = (props) => {
           >Salvar</CButton>{' '}
           <CButton
             color="secondary"
-            onClick={() => setModalInsert(false)}
+            onClick={() => {
+                setModalInsert(!modalInsert)
+            }}
           >Cancelar</CButton>
         </CModalFooter>
       </CModal>
