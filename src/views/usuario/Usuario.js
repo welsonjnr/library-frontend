@@ -22,8 +22,7 @@ const Usuario = () => {
 
   const [formData, setFormData] = useState(
     {
-      id: "",
-      name: "",
+      nome: "",
       email: "",
       senha: ""
     }
@@ -41,7 +40,6 @@ const Usuario = () => {
               <table className="table table-striped table-hover">
                 <tbody>
                        <tr>
-                          <td>id: '(aqui tem o id)'</td>
                           <td>nome: '(aqui tem o nome)'</td>
                           <td>email: '(aqui tem o email)'</td>
                           <td>senha: '(aqui tem o senha)'</td>
@@ -56,7 +54,7 @@ const Usuario = () => {
         onClick={() => {
         setFormData({
           id: null,
-          name: "",
+          nome: "",
           email: "",
           senha: ""
         })
@@ -71,16 +69,18 @@ const Usuario = () => {
           <CModalTitle>Cadastro</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          <ModalUsuario />
+          <ModalUsuario 
+          setFormData={setFormData}
+          formData={formData}/>
         </CModalBody>
         <CModalFooter>
           <CButton color="primary"
           onClick={() => {
-            Api.insertUsuario(formData).then(_ => {
+            Api.insertUsuario(formData).then(_=> {
               setModalInsert(!modalInsert)
             })
           }}
-          >Salvar</CButton>{' '}
+          > Salvar</CButton>{' '}
           <CButton
             color="secondary"
             onClick={() => setModalInsert(false)}
