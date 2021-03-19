@@ -181,11 +181,59 @@ export function listAllLoansToHireSearch(queryParam, content) {
   })
 };
 
+export function listAllUsers(queryParam, content) {
+  return new Promise((resolve, reject) => {
+    instance.get(`/library/user?${queryParam}=${content}`)
+      .then(({data}) => {
+        if (data.length === 0) resolve([]);
+        const formattedList = data.map(user =>
+          ({
+            id: user.id,
+            nome : user.nome,
+            email : user.email,
+            senha : user.senha,
+          }));
+        resolve(formattedList);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  })
+};
+
+export function updateUsuario(usuario) {
+  return new Promise((resolve, reject) => {
+    instance.put(`/library/user/${usuario.id}`, { ...usuario })
+      .then( _ => { resolve(); })
+      .catch(err => {
+        reject(err);
+      });
+  })
+};
+
 export function insertUsuario(usuario) {
   return new Promise((resolve, reject) => {
     instance.post('/library/user', usuario)
       .then(_ => resolve())
       .catch(e => reject(e))
+  })
+}
+
+export function insertLoan(loan) {
+  return new Promise((resolve, reject) => {
+    instance.post(`/library/loans`, { ...loan })
+      .then( _ => { resolve(); })
+      .catch(err => {
+        reject(err);
+      });
+  })
+};
+
+export function deleteUser(user) {
+  return new Promise((resolve, reject) => {
+    instance.delete(`/library/user/${user.id}`)
+      .then(_ => resolve())
+      .catch(err => reject(err))
   })
 }
 

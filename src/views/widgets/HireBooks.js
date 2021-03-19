@@ -36,6 +36,12 @@ const HireBooks = (props) => {
     }
   })
 
+  const [formDataLoan, setFormDataLoan] = useState({
+    id:"",
+    bookId: "",
+    clientId: ""
+  })
+
   // useEffect(() => {
   //   console.log(formData)
   // },[formData])
@@ -128,10 +134,16 @@ const HireBooks = (props) => {
           <CModalTitle>Cadastro</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          <ModalEmprestimo formData={formData}/>
+          <ModalEmprestimo formData={formData} formDataLoan={formDataLoan} setFormDataLoan={setFormDataLoan}/>
         </CModalBody>
         <CModalFooter>
-          <CButton color="primary">Salvar</CButton>{' '}
+          <CButton color="primary"
+          onClick={() => {
+            Api.insertLoan(formDataLoan).then(_=> {
+              setModalInsert(!modalInsert)
+            })
+          }}
+          >Salvar</CButton>{' '}
           <CButton
             color="secondary"
             onClick={() => setModalInsert(false)}
