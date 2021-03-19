@@ -174,7 +174,7 @@ const Emprestimo = (props) => {
                   <td>
                     
                     <CButton type="submit" 
-                    disabled={item.status === 'DEVOLVIDO'}
+                    disabled={item.status !== 'RENOVADO' && item.status !== 'OK'}
                     color="primary"
                     onClick={() => {
                       setModalReturn(!modalReturn)
@@ -187,7 +187,7 @@ const Emprestimo = (props) => {
                   }
                   ><CIcon name="cil-arrow-circle-bottom" title="Retornar"/></CButton>
                     <CButton type="submit"
-                    disabled={item.status === 'DEVOLVIDO' || item.status === 'RENOVADO'}
+                    disabled={item.status === 'RENOVADO' || item.status === 'DEVOLVIDO'}
                     color="dark"
                     onClick={() => {
                       setModalRenew(!modalRenew)
@@ -201,8 +201,10 @@ const Emprestimo = (props) => {
                     ><CIcon name="cil-reload" title="Renovar"/></CButton>
                     <CButton type="reset" color="danger"><CIcon name="cil-trash" title="Excluir" onClick={() => {
                       setDanger(!danger)
-                      setFormDataLoan({
-                        id: item.id
+                      setFormData({
+                        id: item.id,
+                        bookId: item.idBook,
+                        clientId: item.idClient
                       })
                     }}/></CButton>
                   </td>
