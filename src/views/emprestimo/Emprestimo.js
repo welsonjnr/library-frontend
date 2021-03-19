@@ -74,10 +74,10 @@ const Emprestimo = (props) => {
     console.log(formData)
   },[formData])
 
-  useEffect(() => {
-    setFormData({ ...formData, livro: props.formData })
-  }, [props.formData])
-
+    useEffect(() => {
+      setFormData({ ...formData, livro: props.formData })
+    }, [props.formData])
+  
 
   return (
     <>
@@ -171,6 +171,11 @@ const Emprestimo = (props) => {
                       <CInput id="cpfClienteEmprestimo"
                               placeholder="Insira o nome do cliente"
                               onChange={(e) => setSearchClient(e.target.value)}
+                              onChange={e => setFormData({
+                                ...formData,
+                                cliente: {...formData.cliente, nome: e.target.value}
+                              })}
+                              value={formData.cliente.nome}
                               onKeyPress={(e) => {
                                 if (e.key === "Enter") {
                                   searchClients()
@@ -190,19 +195,29 @@ const Emprestimo = (props) => {
                   </CFormGroup>
                   <CFormGroup>
                     <CLabel htmlFor="cpfCliente">CPF</CLabel>
-                    <CInput id="cpfClienteEmprestimo" placeholder="Insira o cpf do livro"/>
+                    <CInput id="cpfClienteEmprestimo" 
+                    value={formData.cliente.cpf}
+                    onChange={e => setFormData({
+                      ...formData,
+                      cliente: {...formData.cliente, cpf: e.target.value}
+                    })}
+                    placeholder="Insira o cpf do livro"/>
                   </CFormGroup>
                   <CFormGroup row className="my-0">
                     <CCol xs="6">
                       <CFormGroup>
                         <CLabel htmlFor="email">Email</CLabel>
-                        <CInput id="emailClienteEmprestimo" placeholder="email" disabled/>
+                        <CInput id="emailClienteEmprestimo" 
+                        defaultValue={formData.cliente.email}
+                        placeholder="email" disabled/>
                       </CFormGroup>
                     </CCol>
                     <CCol xs="6">
                       <CFormGroup>
                         <CLabel htmlFor="status">Status</CLabel>
-                        <CInput id="statusClienteEmprestimo" placeholder="status" disabled/>
+                        <CInput id="statusClienteEmprestimo" 
+                        defaultValue={formData.livro.status}
+                        placeholder="status" disabled/>
                       </CFormGroup>
                     </CCol>
                   </CFormGroup>
@@ -262,11 +277,10 @@ const Emprestimo = (props) => {
 
         </CModalBody>
         <CModalFooter>
-          <CButton color="success">Confirmar</CButton>{' '}
           <CButton
-            color="secondary"
+            color="success"
             onClick={() => setSuccess(false)}
-          >Cancelar</CButton>
+          >OK</CButton>
         </CModalFooter>
       </CModal>
 
@@ -315,11 +329,10 @@ const Emprestimo = (props) => {
           </CCard>
         </CModalBody>
         <CModalFooter>
-          <CButton color="primary">Confirmar</CButton>{' '}
           <CButton
-            color="secondary"
+            color="info"
             onClick={() => setInfo(false)}
-          >Cancelar</CButton>
+          >OK</CButton>
         </CModalFooter>
       </CModal>
     </>

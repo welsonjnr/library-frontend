@@ -27,12 +27,32 @@ const Emprestimo = (props) => {
   const [modalRenew, setModalRenew] = useState(false)
   const [modalReturn, setModalReturn] = useState(false)
 
-  const [returnDesabled, setReturnDesabled] = useState(false)
-
   const [loanList, setLoanList] = useState([]);
   const [search, setSearch] = useState("");
 
-  const [formData, setFormData] = useState(
+  const [formData, setFormData] = useState({
+    cliente: {
+      cpf: "",
+      curso: "",
+      email: "",
+      id: "",
+      instituição: "",
+      nome: "",
+      periodo: "",
+      status: ""
+    },
+    livro: {
+      autor: "",
+      categoria: "",
+      edição: "",
+      id: "",
+      quantidade: "",
+      status: "",
+      título: ""
+    }
+  })
+
+  const [formDataLoan, setFormDataLoan] = useState(
     {
       id: "",
       loanDay: "",
@@ -78,6 +98,14 @@ const Emprestimo = (props) => {
         setLoanList(loanList.map(loan => ({...loan})))
       });
   }
+
+  useEffect(() => {
+    console.log(formData)
+  },[formData])
+
+  useEffect(() => {
+    setFormData({ ...formData, livro: props.formData })
+  }, [props.formData])
 
   useEffect(function loadAll() {
     const mounted = true;
@@ -176,7 +204,7 @@ const Emprestimo = (props) => {
                     ><CIcon name="cil-reload" title="Renovar"/></CButton>
                     <CButton type="reset" color="danger"><CIcon name="cil-trash" title="Excluir" onClick={() => {
                       setDanger(!danger)
-                      setFormData({
+                      setFormDataLoan({
                         id: item.id
                       })
                     }}/></CButton>
@@ -218,7 +246,7 @@ const Emprestimo = (props) => {
           <CModalTitle>Cadastro</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          <ModalEmprestimo/>
+          <ModalEmprestimo formDataLoan={formDataLoan} setFormDataLoan={setFormDataLoan}/>
         </CModalBody>
         <CModalFooter>
           <CButton color="primary">Salvar</CButton>{' '}

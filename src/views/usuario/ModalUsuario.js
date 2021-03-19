@@ -43,7 +43,10 @@ const ModalUsuario = (props) => {
               </CFormGroup>
               <CFormGroup>
                 <CLabel htmlFor="senhaUsuario2">Digite novamente a senha</CLabel>
-                <CInput id="senhaUsuario2" placeholder="Insira a senha novamente" type="password"/>
+                <CInput id="senhaUsuario2" 
+                placeholder="Insira a senha novamente" 
+                value={props.formData.senha}
+                type="password"/>
               </CFormGroup>
             </CCardBody>
           </CCard>
