@@ -222,7 +222,7 @@ const Emprestimo = (props) => {
                       <CFormGroup>
                         <CLabel htmlFor="status">Status</CLabel>
                         <CInput id="statusClienteEmprestimo" 
-                        defaultValue={formData.livro.status}
+                        defaultValue={formData.cliente.status}
                         placeholder="status" disabled/>
                       </CFormGroup>
                     </CCol>

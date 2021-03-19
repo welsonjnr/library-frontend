@@ -7,6 +7,6 @@ export default (props) => {
 
   const { authorization } = useContext( AuthorizationContext )
 
-  return authorization ? <Route {...props} /> : <Redirect to={props.redirect} />
+  return !authorization ? <Route {...props} /> : <Redirect to={props.redirect} />
   // return <Route {...props} />
 }
