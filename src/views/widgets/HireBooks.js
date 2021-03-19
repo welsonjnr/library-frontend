@@ -24,10 +24,26 @@ const HireBooks = (props) => {
   const [search, setSearch] = useState("");
   const [modalInsert, setModalInsert] = useState(false)
 
+  const [formData, setFormData] = useState({
+    livro: {
+      autor: "",
+      categoria: "",
+      edição: "",
+      id: "",
+      quantidade: "",
+      status: "",
+      título: ""
+    }
+  })
+
+  // useEffect(() => {
+  //   console.log(formData)
+  // },[formData])
+
 
   useEffect(function loadAll() {
     Api.listAllBooksToHire()
-      .then(bookList => setBookList(bookList.map(book => ({ ...book, categoria: book.categoria}))))
+      .then(bookList => setBookList(bookList.map(book => ({...book, categoria: book.categoria}))))
   }, [])
 
   function searchBooks() {
@@ -89,10 +105,13 @@ const HireBooks = (props) => {
                 ),
               alugar: (item, index) => (
                 <td>
-                  <CButton variant="outline" 
-                          color="primary" 
-                          onClick={() => setModalInsert(!modalInsert)}
-                          size="sm">Alugar</CButton>
+                  <CButton variant="outline"
+                           color="primary"
+                           onClick={() => {
+                             setFormData(item)
+                             setModalInsert(!modalInsert)
+                           }}
+                           size="sm">Alugar</CButton>
                 </td>
               )
             }}
@@ -109,7 +128,7 @@ const HireBooks = (props) => {
           <CModalTitle>Cadastro</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          <ModalEmprestimo/>
+          <ModalEmprestimo formData={formData}/>
         </CModalBody>
         <CModalFooter>
           <CButton color="primary">Salvar</CButton>{' '}
