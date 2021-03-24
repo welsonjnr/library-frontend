@@ -74,8 +74,8 @@ const Clientes = (props) => {
     <>
       {/*<CCol xs="12" lg="6">*/}
       <CCard>
-        <CCardHeader>
-          Clientes
+        <CCardHeader style={{background:'#607d8b', color: 'white'}}>
+          <h5>Clientes</h5>
         </CCardHeader>
         <CCardBody>
           <CRow>
@@ -211,7 +211,7 @@ const Clientes = (props) => {
         show={modal}
         onClose={setModal}
       >
-        <CModalHeader closeButton>
+        <CModalHeader closeButton style={{background:'#607d8b', color: 'white'}}>
           <CModalTitle>Edição</CModalTitle>
         </CModalHeader>
         <CModalBody>
@@ -237,8 +237,8 @@ const Clientes = (props) => {
         show={modalInsert}
         onClose={setModalInsert}
       >
-        <CModalHeader closeButton>
-          <CModalTitle>Cadastro</CModalTitle>
+        <CModalHeader closeButton style={{background:'#607d8b', color: 'white'}}>
+          <CModalTitle>Cadastro de cliente</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <FormCliente 

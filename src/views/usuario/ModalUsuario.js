@@ -17,9 +17,6 @@ const ModalUsuario = (props) => {
       <CRow>
         <CCol xs="12" sm="12">
           <CCard>
-            <CCardHeader>
-              Usuário
-            </CCardHeader>
             <CCardBody>
               <CFormGroup>
                 <CLabel htmlFor="nomeUsuario">Nome</CLabel>

@@ -19,9 +19,6 @@ const ModalFormLivro = (props) => {
       <CRow>
         <CCol xs="12" sm="12">
           <CCard>
-            <CCardHeader>
-              Livro
-            </CCardHeader>
             <CCardBody>
               <CFormGroup>
                 <CLabel htmlFor="nomelivro">Livro</CLabel>

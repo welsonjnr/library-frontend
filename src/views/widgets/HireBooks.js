@@ -61,8 +61,8 @@ const HireBooks = (props) => {
     <>
       {/*<CCol xs="12" lg="6">*/}
       <CCard>
-        <CCardHeader>
-          Livros
+        <CCardHeader style={{background:'#607d8b', color: 'white'}}>
+          <h5>Livros</h5>
         </CCardHeader>
         <CCardBody>
           <CRow>
@@ -135,8 +135,8 @@ const HireBooks = (props) => {
         onClose={setModalInsert}
         size="lg"
       >
-        <CModalHeader closeButton>
-          <CModalTitle>Cadastro</CModalTitle>
+        <CModalHeader closeButton style={{background:'#607d8b', color: 'white'}}>
+          <CModalTitle>Empréstimo</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <ModalEmprestimo formData={formData} formDataLoan={formDataLoan} setFormDataLoan={setFormDataLoan}/>

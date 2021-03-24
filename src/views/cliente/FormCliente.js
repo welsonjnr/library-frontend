@@ -17,9 +17,6 @@ const FormCliente = (props) => {
       <CRow>
         <CCol xs="12" sm="12">
           <CCard>
-            <CCardHeader>
-              Cliente
-            </CCardHeader>
             <CCardBody>
               <CFormGroup>
                 <CLabel htmlFor="nome">Nome</CLabel>

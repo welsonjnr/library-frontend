@@ -64,8 +64,8 @@ const Livro = (props) => {
     <>
       {/*<CCol xs="12" lg="6">*/}
       <CCard>
-        <CCardHeader>
-          Livros
+        <CCardHeader style={{background:'#607d8b', color: 'white'}}>
+          <h5>Livros</h5>
         </CCardHeader>
         <CCardBody>
           <CRow>
@@ -192,7 +192,7 @@ const Livro = (props) => {
         show={modal}
         onClose={setModal}
       >
-        <CModalHeader closeButton>
+        <CModalHeader closeButton style={{background:'#607d8b', color: 'white'}}>
           <CModalTitle>Edição</CModalTitle>
         </CModalHeader>
         <CModalBody>
@@ -219,8 +219,8 @@ const Livro = (props) => {
         show={modalInsert}
         onClose={setModalInsert}
       >
-        <CModalHeader closeButton>
-          <CModalTitle>Cadastro</CModalTitle>
+        <CModalHeader closeButton style={{background:'#607d8b', color: 'white'}}>
+          <CModalTitle>Cadastro de livro</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <ModalUpdateLivro

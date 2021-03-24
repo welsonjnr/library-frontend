@@ -59,13 +59,13 @@ const Usuario = () => {
       <CRow>
         <CCol lg={6}>
           <CCard>
-            <CCardHeader>
-              Usuário
+            <CCardHeader style={{background:'#607d8b', color: 'white'}}>
+              <h5>Usuários</h5>
             </CCardHeader>
             <CCardBody>
             <CDataTable
             items={userList}
-            fields={['ações', 'nome', 'email', 'senha']}
+            fields={['nome', 'email', 'senha', 'ações']}
             itemsPerPage={8}
             pagination
             scopedSlots={{
@@ -121,8 +121,8 @@ const Usuario = () => {
         show={modalInsert}
         onClose={setModalInsert}
       >
-        <CModalHeader closeButton>
-          <CModalTitle>Cadastro</CModalTitle>
+        <CModalHeader closeButton style={{background:'#607d8b', color: 'white'}}>
+          <CModalTitle>Cadastro de Usuário</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <ModalUsuario 
@@ -149,7 +149,7 @@ const Usuario = () => {
         show={modal}
         onClose={setModal}
       >
-        <CModalHeader closeButton>
+        <CModalHeader closeButton style={{background:'#607d8b', color: 'white'}}>
           <CModalTitle>Edição</CModalTitle>
         </CModalHeader>
         <CModalBody>

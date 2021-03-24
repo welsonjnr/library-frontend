@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import axios from '../../../common/axios'
 import { AuthorizationContext } from '../../../context/AuthorizationContext'
+import img from '../../../imgs/imagem.png'
 
 import {
   CButton,
@@ -39,6 +40,7 @@ const Login = () => {
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
+                  <div style={{marginLeft: '30%'}}><img src={img}/></div>
                   <CForm>
                     <h1>Login</h1>
                     <p className="text-muted">Faça login em sua conta</p>

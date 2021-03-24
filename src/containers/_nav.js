@@ -29,6 +29,12 @@ const _nav =  [
     to: '/emprestimos',
     icon: 'cil-arrow-thick-from-bottom',
   },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Sobre',
+    to: '/sobre',
+    icon: 'cil-cursor',
+  },
   /*
   {
     _tag: 'CSidebarNavItem',

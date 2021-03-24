@@ -114,8 +114,8 @@ const Emprestimo = (props) => {
     <>
       {/*<CCol xs="12" lg="6">*/}
       <CCard>
-      <CCardHeader>
-        Empréstimos
+      <CCardHeader style={{background:'#607d8b', color: 'white'}}>
+        <h5>Empréstimos</h5>
       </CCardHeader>
       <CCardBody>
         <CRow>
@@ -241,8 +241,8 @@ const Emprestimo = (props) => {
         onClose={setModalInsert}
         size="lg"
       >
-        <CModalHeader closeButton>
-          <CModalTitle>Cadastro</CModalTitle>
+        <CModalHeader closeButton style={{background:'#607d8b', color: 'white'}}>
+          <CModalTitle>Empréstimo</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <ModalEmprestimo formDataLoan={formDataLoan} setFormDataLoan={setFormDataLoan}/>

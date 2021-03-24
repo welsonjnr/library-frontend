@@ -93,12 +93,9 @@ const Emprestimo = (props) => {
       <CRow>
         <CCol xs="12" sm="12">
           <CCard>
-            <CCardHeader>
-              Empréstimo
-            </CCardHeader>
             <CCardBody>
               <CCard>
-                <CCardHeader>Livro</CCardHeader>
+                <CCardHeader style={{background:'#607d8b', color: 'white'}} >Livro</CCardHeader>
                 <CCardBody>
                   <CFormGroup row>
                     <CCol xs="11">
@@ -172,7 +169,7 @@ const Emprestimo = (props) => {
                 </CCardBody>
               </CCard>
               <CCard>
-                <CCardHeader>Cliente</CCardHeader>
+                <CCardHeader style={{background:'#607d8b', color: 'white'}}>Cliente</CCardHeader>
                 <CCardBody>
                   <CFormGroup row>
                     <CCol xs="11">
